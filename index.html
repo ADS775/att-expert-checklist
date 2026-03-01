@@ -1,1087 +1,215 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AT&amp;T Fiber • AFO — Expert Path Checklist</title>
-  <style>
-    :root{
-      --bg0:#07121a;
-      --bg1:#0a1b26;
-      --bg2:#0b2533;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.08);
-      --stroke:rgba(255,255,255,.10);
-      --stroke2:rgba(255,255,255,.14);
-      --text:#e7eef7;
-      --muted:rgba(231,238,247,.70);
-      --muted2:rgba(231,238,247,.55);
-      --good:#22c55e;
-      --bad:#fb7185;
-      --warn:#f59e0b;
-      --blue:#1aa7d8;
-      --green:#8cc63e;
-      --shadow:0 18px 55px rgba(0,0,0,.35);
-      --radius:22px;
-      --radius2:18px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AT&T Fiber • Expert Path</title>
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 12% -8%, rgba(26,167,216,.22), transparent 60%),
-        radial-gradient(900px 650px at 85% 0%, rgba(34,197,94,.16), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg2));
-      overflow-x:hidden;
-    }
+<style>
+:root{
+  --bg:#0b1e2a;
+  --card:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.12);
+  --blue:#1aa7d8;
+  --green:#8cc63e;
+  --warn:#f59e0b;
+  --text:#e6eef7;
+}
 
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 26px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035));
-      border:1px solid var(--stroke2);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    header{
-      padding:18px 18px 14px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      background:
-        radial-gradient(900px 420px at 20% 0%, rgba(26,167,216,.18), transparent 60%),
-        radial-gradient(780px 420px at 82% 15%, rgba(34,197,94,.12), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:linear-gradient(180deg,#08151f,#0f2c3c);
+  color:var(--text);
+}
 
-    .topRow{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
-    .brand{
-      display:flex;gap:12px;align-items:center;flex:1 1 520px;
-      min-width:260px;
-    }
-    .logo{
-      width:46px;height:46px;border-radius:14px;
-      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), rgba(255,255,255,.10) 45%, rgba(0,0,0,.18) 72%),
-                 radial-gradient(circle at 65% 65%, rgba(26,167,216,.45), rgba(26,167,216,.06) 65%, transparent 70%);
-      border:1px solid rgba(255,255,255,.20);
-      display:grid;place-items:center;
-      position:relative;overflow:hidden;
-    }
-    .logo:before{
-      content:"";
-      position:absolute;inset:-14px;
-      background:conic-gradient(from 200deg, rgba(26,167,216,.8), rgba(140,198,62,.7), rgba(26,167,216,.7));
-      opacity:.12;
-      filter:blur(18px);
-    }
-    .logo svg{width:30px;height:30px;opacity:.92;position:relative}
+.wrap{max-width:950px;margin:auto;padding:18px}
+.section{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:20px;
+  margin-top:14px;
+  overflow:hidden;
+}
+.section summary{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px;
+  cursor:pointer;
+  font-weight:900;
+}
+.status{
+  margin-left:auto;
+  font-size:12px;
+  padding:6px 12px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.15);
+}
+.status.done{
+  background:rgba(34,197,94,.2);
+}
+.badge svg{
+  width:54px;
+  height:54px;
+}
 
-    h1{margin:0;font-size:34px;line-height:1.1;letter-spacing:.2px}
-    h1 .accent{color:#27a9dd}
-    .sub{margin-top:6px;color:var(--muted);line-height:1.35}
-
-    .chips{display:flex;gap:8px;align-items:center;flex:0 0 auto}
-    .chip{
-      padding:7px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:rgba(231,238,247,.84);
-      font-weight:700;font-size:12px;letter-spacing:.12em;
-      text-transform:uppercase;
-      display:flex;gap:8px;align-items:center;
-    }
-    .dot{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.35);box-shadow:0 0 0 2px rgba(0,0,0,.15) inset}
-    .dot.blue{background:rgba(26,167,216,.85)}
-    .dot.green{background:rgba(140,198,62,.85)}
-
-    .controls{
-      margin-top:14px;
-      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-    }
-
-    .seg{
-      display:flex;background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      padding:6px;border-radius:999px;
-      gap:6px;
-    }
-    .seg button{
-      border:0;background:transparent;color:rgba(231,238,247,.78);
-      padding:9px 14px;border-radius:999px;cursor:pointer;
-      font-weight:800;font-size:14px;
-    }
-    .seg button.active{
-      background:rgba(255,255,255,.12);
-      color:rgba(231,238,247,.96);
-      box-shadow:0 6px 20px rgba(0,0,0,.25) inset;
-    }
-
-    .pill{
-      display:flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:999px;
-      border:1px dashed rgba(255,255,255,.18);
-      color:rgba(231,238,247,.78);
-      background:rgba(255,255,255,.04);
-      font-weight:750;
-      flex:1 1 220px;
-      min-width:220px;
-      justify-content:center;
-    }
-    .pill .smallDot{
-      width:10px;height:10px;border-radius:99px;background:rgba(255,255,255,.22);
-      box-shadow:0 0 0 2px rgba(0,0,0,.18) inset;
-    }
-    .pill .smallDot.blue{background:rgba(26,167,216,.85)}
-    .pill .smallDot.green{background:rgba(140,198,62,.85)}
-
-    /* Safety callout */
-    .safety{
-      margin-top:14px;
-      padding:16px 16px 14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(135deg, rgba(245,158,11,.16), rgba(255,255,255,.05) 35%, rgba(255,255,255,.035));
-      position:relative;
-      overflow:hidden;
-    }
-    .safety:before{
-      content:"";
-      position:absolute;inset:-40px;
-      background:radial-gradient(circle at 20% 10%, rgba(245,158,11,.55), transparent 60%),
-                 radial-gradient(circle at 90% 70%, rgba(245,158,11,.20), transparent 55%);
-      opacity:.22;filter:blur(22px);
-    }
-    .safetyInner{position:relative}
-    .safetyHead{display:flex;gap:10px;align-items:flex-start}
-    .warnIcon{
-      width:28px;height:28px;border-radius:10px;
-      background:rgba(245,158,11,.25);
-      border:1px solid rgba(245,158,11,.45);
-      display:grid;place-items:center;
-      flex:0 0 auto;
-      margin-top:1px;
-    }
-    .warnIcon svg{width:16px;height:16px;opacity:.95}
-    .safetyTitle{font-weight:900;font-size:18px;line-height:1.2;margin:0}
-    .safetyBody{margin-top:10px;color:rgba(231,238,247,.88);line-height:1.35}
-    .safetyBody b{color:rgba(231,238,247,.96)}
-    .whyBtn{
-      margin-top:10px;
-      display:flex;gap:10px;align-items:center;
-      padding:10px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.14);
-      color:rgba(231,238,247,.88);
-      font-weight:850;
-      user-select:none;
-    }
-    .whyBtn:hover{background:rgba(0,0,0,.18)}
-    .whyBtn .chev{margin-left:auto;opacity:.8}
-    .whyPanel{
-      display:none;
-      margin-top:10px;
-      padding:12px 12px 10px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.14);
-      color:rgba(231,238,247,.82);
-      line-height:1.35;
-    }
-    .whyPanel ul{margin:8px 0 0 18px;padding:0}
-    .whyPanel li{margin:6px 0}
-
-    /* Stats / progress */
-    .stats{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      align-items:stretch;
-    }
-    .stat{
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .stat .label{color:rgba(231,238,247,.62)}
-    .stat .value{font-size:36px;font-weight:900;letter-spacing:.6px}
-    .stat .value small{font-size:20px;color:rgba(231,238,247,.72);font-weight:850}
-
-    .progressWrap{margin-top:12px}
-    .bar{
-      height:14px;border-radius:99px;
-      background:rgba(255,255,255,.14);
-      overflow:hidden;border:1px solid rgba(255,255,255,.10);
-    }
-    .bar>div{
-      height:100%;
-      width:0%;
-      border-radius:99px;
-      background:linear-gradient(90deg, rgba(26,167,216,.95), rgba(140,198,62,.92));
-      transition:width .25s ease;
-    }
-
-    /* Marker rail */
-    .markerRail{
-      margin-top:12px;
-      padding:10px 12px;
-      background:rgba(255,255,255,.22);
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      display:flex;gap:14px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-    }
-    .markerRail::-webkit-scrollbar{height:10px}
-    .markerRail::-webkit-scrollbar-thumb{background:rgba(26,167,216,.55);border-radius:99px}
-    .markerRail::-webkit-scrollbar-track{background:rgba(255,255,255,.10);border-radius:99px}
-    .markerChip{
-      display:flex;
-      flex-direction:row;
-      align-items:center;
-      justify-content:flex-start;
-      gap:12px;
-      padding:10px 14px;
-      min-width:220px;
-      max-width:260px;
-      border-radius:40px;
-      background:rgba(255,255,255,.95);
-      border:1px solid rgba(0,0,0,.18);
-      box-shadow:0 1px 0 rgba(255,255,255,.35) inset;
-      cursor:pointer;
-      transition:transform .15s ease, border-color .15s ease;
-      color:#0f172a;
-    }
-    .markerChip:hover{transform:translateY(-1px);border-color:rgba(26,167,216,.35)}
-    .chipText{display:flex;flex-direction:column;gap:2px;min-width:0}
-    .chipSub{
-      color:#0f172a;
-      opacity:1;
-      font-weight:900;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      line-height:1.15;
-      font-size:11px;
-      max-width:160px;
-      white-space:normal;
-      overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      text-overflow:ellipsis;
-    }
-
-    .miniBadge{width:60px;height:60px;flex:0 0 auto}
-
-    /* Actions */
-    .actions{
-      margin-top:14px;
-      display:flex;gap:10px;flex-wrap:wrap;
-    }
-    .btn{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:rgba(231,238,247,.90);
-      padding:12px 14px;border-radius:16px;
-      font-weight:850;cursor:pointer;
-      min-width:160px;
-      text-align:center;
-      user-select:none;
-    }
-    .btn:hover{background:rgba(255,255,255,.08)}
-    .btn.danger{
-      border-color:rgba(251,113,133,.35);
-      background:rgba(251,113,133,.10);
-    }
-    .btn.danger:hover{background:rgba(251,113,133,.14)}
-    .btn.good{
-      border-color:rgba(34,197,94,.32);
-      background:rgba(34,197,94,.10);
-    }
-    .btn.good:hover{background:rgba(34,197,94,.14)}
-
-    /* Sections list */
-    main{padding:16px 18px 18px}
-    .section{
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      margin-top:12px;
-      overflow:hidden;
-    }
-    .secHead{
-      display:flex;align-items:center;gap:12px;
-      padding:14px 14px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .secHead:hover{background:rgba(255,255,255,.03)}
-    .secBadge{
-      width:56px;height:56px;border-radius:18px;
-      background:rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.12);
-      display:grid;place-items:center;
-      flex:0 0 auto;
-    }
-
-    .secText{flex:1 1 auto;min-width:0}
-    .kicker{
-      font-size:12px;
-      color:rgba(231,238,247,.58);
-      font-weight:900;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-    }
-    .title{
-      margin-top:2px;
-      font-size:20px;
-      font-weight:950;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .subtitle{
-      margin-top:4px;
-      color:rgba(231,238,247,.68);
-      font-weight:750;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .statusPill{
-      margin-left:auto;
-      display:flex;align-items:center;gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(251,113,133,.35);
-      background:rgba(251,113,133,.10);
-      font-weight:950;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:12px;
-      color:rgba(255,255,255,.92);
-      flex:0 0 auto;
-    }
-    .statusPill.done{
-      border-color:rgba(34,197,94,.35);
-      background:rgba(34,197,94,.14);
-    }
-    .statusDot{
-      width:10px;height:10px;border-radius:99px;background:rgba(251,113,133,.95);
-      box-shadow:0 0 0 3px rgba(0,0,0,.18) inset;
-    }
-    .statusPill.done .statusDot{background:rgba(34,197,94,.92)}
-
-    .chev{
-      width:34px;height:34px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
-      display:grid;place-items:center;
-      flex:0 0 auto;
-      margin-left:8px;
-    }
-    .chev svg{width:16px;height:16px;opacity:.85;transition:transform .2s ease}
-    .section.open .chev svg{transform:rotate(180deg)}
-
-    .secBody{display:none;padding:0 14px 14px}
-    .section.open .secBody{display:block}
-
-    .items{margin-top:10px;display:flex;flex-direction:column;gap:10px}
-    .item{
-      padding:12px 12px;border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.10);
-    }
-    .itemRow{display:flex;gap:12px;align-items:flex-start}
-    .cb{
-      width:22px;height:22px;border-radius:7px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.05);
-      display:grid;place-items:center;
-      flex:0 0 auto;
-      cursor:pointer;
-      margin-top:1px;
-    }
-    .cb.checked{
-      border-color:rgba(34,197,94,.35);
-      background:rgba(34,197,94,.18);
-    }
-    .cb svg{width:14px;height:14px;opacity:.9}
-    .text{flex:1 1 auto;min-width:0}
-    .text .line{font-weight:850;line-height:1.25}
-    .text .detail{
-      margin-top:6px;color:rgba(231,238,247,.70);
-      line-height:1.25;
-      font-weight:700;
-    }
-    .itemTools{display:flex;gap:8px;align-items:center}
-    .tinyBtn{
-      padding:8px 10px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
-      cursor:pointer;
-      color:rgba(231,238,247,.88);
-      font-weight:850;
-      font-size:12px;
-      user-select:none;
-    }
-    .tinyBtn:hover{background:rgba(255,255,255,.07)}
-    .note{
-      margin-top:8px;
-      padding:10px 10px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.14);
-      color:rgba(231,238,247,.82);
-      display:none;
-    }
-    .note.open{display:block}
-
-    /* Footer */
-    .footer{
-      margin-top:14px;
-      padding:14px 14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.035);
-      color:rgba(231,238,247,.68);
-      display:flex;align-items:center;justify-content:space-between;
-      gap:12px;flex-wrap:wrap;
-    }
-    .footer .left{font-weight:800}
-    .footer .right{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
-    .tip{color:rgba(231,238,247,.55);margin-top:6px}
-    .noteLine{
-      margin-top:12px;
-      color:rgba(231,238,247,.58);
-      font-size:12px;
-    }
-
-    @media (max-width:600px){
-      h1{font-size:30px}
-      .stat .value{font-size:32px}
-      .btn{min-width:160px}
-      .seg button{padding:9px 12px}
-      .markerChip{min-width:190px;max-width:230px}
-    }
-  </style>
+.markerRail{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:12px;
+  border-radius:18px;
+  background:rgba(255,255,255,.15);
+  margin-bottom:18px;
+}
+.markerChip{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:#fff;
+  border-radius:40px;
+  padding:10px 16px;
+  min-width:220px;
+  border:1px solid #ccc;
+  cursor:pointer;
+}
+.markerChip span{
+  color:#0f172a;
+  font-weight:800;
+  font-size:12px;
+}
+.safety{
+  border-left:6px solid var(--warn);
+  background:rgba(245,158,11,.15);
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:18px;
+  font-weight:800;
+}
+.item{
+  padding:12px 16px;
+  border-top:1px solid var(--stroke);
+  display:flex;
+  gap:12px;
+}
+.item input{width:20px;height:20px}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
-      <header>
-        <div class="topRow">
-          <div class="brand">
-            <div class="logo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 12c3-5 13-5 16 0" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6 15c2.5-3 9.5-3 12 0" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M8 18c2-2 6-2 8 0" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h1>AT&amp;T <span class="accent">fiber</span> Expert Path</h1>
-              <div class="sub">
-                <b>AFO</b> — Expert Path Checklist. Tap checkboxes as you complete steps.<br/>
-                Progress saves automatically on this device.
-              </div>
-            </div>
-          </div>
-
-          <div class="chips">
-            <div class="chip"><span class="dot"></span> AFO</div>
-            <div class="chip"><span class="dot"></span> BETA &nbsp;•&nbsp; FIELD TEST</div>
-          </div>
-        </div>
-
-        <div class="controls">
-          <div class="seg" role="tablist" aria-label="Mode switch">
-            <button id="btnInstall" class="active" type="button">Install</button>
-            <button id="btnRepair" type="button">Repair</button>
-          </div>
-
-          <div class="pill" aria-label="Wi-Fi extenders status">
-            <span class="smallDot"></span>
-            Wi-Fi Extenders (WIP)
-          </div>
-
-          <div class="pill" id="modePill">
-            <span class="smallDot blue" id="modeDot"></span>
-            Mode: <span id="modeText">Install</span>
-          </div>
-        </div>
-
-        <div class="safety">
-          <div class="safetyInner">
-            <div class="safetyHead">
-              <div class="warnIcon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3l10 18H2L12 3z" stroke="rgba(245,158,11,.95)" stroke-width="2" />
-                  <path d="M12 9v5" stroke="rgba(245,158,11,.95)" stroke-width="2" stroke-linecap="round"/>
-                  <circle cx="12" cy="17.5" r="1.1" fill="rgba(245,158,11,.95)"/>
-                </svg>
-              </div>
-              <div style="flex:1">
-                <p class="safetyTitle">Safety Reminder — PPE &amp; FVD (Foreign Voltage Detector)</p>
-              </div>
-            </div>
-
-            <div class="safetyBody">
-              <div><b>PPE:</b> Wear all required PPE for the job function (and any local/site requirements) before starting work.</div>
-              <div style="margin-top:8px"><b>FVD:</b> Use a Foreign Voltage Detector when conditions warrant before contacting metallic enclosures/terminals. Treat circuits as energized until verified safe.</div>
-            </div>
-
-            <div class="whyBtn" id="whyBtn">
-              Why this matters
-              <span class="chev" style="margin-left:auto;background:transparent;border-color:transparent;width:auto;height:auto;padding:0">
-                <span style="opacity:.8">▼</span>
-              </span>
-            </div>
-            <div class="whyPanel" id="whyPanel">
-              <b>Protect yourself and the customer.</b>
-              <ul>
-                <li>Electrical hazards can be present even when service is “down.”</li>
-                <li>Foreign voltage can appear on metallic enclosures/terminals due to faults, bonding issues, or backfeed.</li>
-                <li>PPE + verification helps prevent injury, equipment damage, and repeat visits.</li>
-              </ul>
-            </div>
-
-            <div class="stats">
-              <div class="stat">
-                <div class="label">Sections done</div>
-                <div class="value"><span id="secDone">0</span> <small>/ <span id="secTotal">0</span></small></div>
-              </div>
-              <div class="stat">
-                <div class="label">Items done</div>
-                <div class="value"><span id="itDone">0</span> <small>/ <span id="itTotal">0</span></small></div>
-              </div>
-            </div>
-
-            <div class="progressWrap">
-              <div class="bar"><div id="barFill"></div></div>
-            </div>
-
-            <div class="markerRail" id="markerRail" aria-label="Marker shortcuts"></div>
-
-            <div class="actions">
-              <div class="btn" id="btnExpand">Expand all</div>
-              <div class="btn" id="btnCollapse">Collapse all</div>
-              <div class="btn danger" id="btnReset">Reset progress</div>
-              <div class="btn good" id="btnCompleteClear">Complete &amp; Clear</div>
-            </div>
-          </div>
-        </div>
-
-      </header>
-
-      <main id="main"></main>
-    </div>
-  </div>
-
-  <script>
-  // -----------------------------
-  // Data
-  // -----------------------------
-  const VALUES = [
-    { id:"v_c", marker:null, title:"Care for Customers and Each Other", kicker:"Make it personal • Lead with respect & safety", items:[] , badge:"C"},
-    { id:"v_o", marker:null, title:"Own It", kicker:"Own the complexity • Make it simple for customers", items:[] , badge:"O"},
-    { id:"v_d", marker:null, title:"Deliver with Expertise", kicker:"Be authentic • Do it right, document it right", items:[] , badge:"D"},
-    { id:"v_e", marker:null, title:"Exceed Expectations", kicker:"Make it matter • Create “wow” moments", items:[] , badge:"E"},
-    { id:"v_cc", marker:null, title:"Crucial Conversations", kicker:"De-escalate • Own it • Build trust", items:[] , badge:"CC"},
-  ];
-
-  // Install checklist (markers 1–7)
-  const INSTALL = [
-    // SAFETY FIRST (non-marker)
-    { id:"i0", marker:null, title:"Safety First", kicker:"Before beginning work", items:[
-      { id:"i0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
-      { id:"i0_fvd", text:"Use a Foreign Voltage Detector (FVD) when conditions warrant before contacting metallic enclosures/terminals.", detail:"Treat circuits as energized until verified safe. Verify tool function per local guidance." },
-      { id:"i0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe (weather, pets, trip hazards, unsafe access)." }
-    ]},
-
-    { id:"i_pre", marker:null, title:"Pre-Call", kicker:"Before arriving", items:[
-      { id:"i_pre_1", text:"Confirm appointment window and notes in dispatch.", detail:"Review service order, products, speed tier, and any prior notes." },
-      { id:"i_pre_2", text:"Send/confirm pre-call message (pets secured, app download, time estimate).", detail:"Set expectations: ~3 hours typical, may vary with scope." },
-    ]},
-
-    { id:"i_m1", marker:1, title:"Greet & Verify", kicker:"Marker 1", items:[
-      { id:"i_m1_1", text:"Greet customer and verify order details.", detail:"Confirm address, service type, and expectations." },
-      { id:"i_m1_2", text:"Confirm ONT/terminal location and access.", detail:"Discuss where equipment will go and routing options." },
-    ]},
-
-    { id:"i_m2", marker:2, title:"Qualify to Terminal", kicker:"Marker 2", items:[
-      { id:"i_m2_1", text:"Check terminal availability and signal at terminal.", detail:"Verify assigned port, light levels, and connector condition." },
-      { id:"i_m2_2", text:"Confirm pathway feasibility and best entry point.", detail:"Avoid hazards, ensure proper clearances." },
-    ]},
-
-    { id:"i_m3", marker:3, title:"Survey Customer & Premises", kicker:"Marker 3", items:[
-      { id:"i_m3_1", text:"Walk the route with the customer.", detail:"Confirm equipment location and cable path." },
-      { id:"i_m3_2", text:"Identify drill points, wall types, and obstructions.", detail:"Plan for best aesthetics and protection." },
-    ]},
-
-    { id:"i_m4", marker:4, title:"Extend to Home", kicker:"Marker 4", items:[
-      { id:"i_m4_1", text:"Run/drop fiber to home following standards.", detail:"Secure and protect fiber; use proper slack and drip loops." },
-      { id:"i_m4_2", text:"Install NID/entry as required.", detail:"Seal penetrations, maintain weatherproofing." },
-    ]},
-
-    { id:"i_m5", marker:5, title:"Connect to Gateway", kicker:"Marker 5", items:[
-      { id:"i_m5_1", text:"Connect ONT (if applicable) to gateway and power up.", detail:"Verify cabling and power source." },
-      { id:"i_m5_2", text:"Validate service activation and internet connectivity.", detail:"Confirm lights/telemetry per process." },
-    ]},
-
-    { id:"i_m6", marker:6, title:"Finalize Experience", kicker:"Marker 6", items:[
-      { id:"i_m6_1", text:"Optimize Wi-Fi placement and educate customer.", detail:"Recommend best gateway placement and basic usage tips." },
-      { id:"i_m6_2", text:"Confirm Smart Home Manager registration.", detail:"Ensure customer can manage Wi-Fi and devices." },
-    ]},
-
-    { id:"i_m7", marker:7, title:"Verify, Thank & Close", kicker:"Marker 7", items:[
-      { id:"i_m7_1", text:"Perform final tests and speed check (as applicable).", detail:"Confirm customer satisfaction." },
-      { id:"i_m7_2", text:"Clean up, thank customer, and close out job notes.", detail:"Document routing, equipment, and any exceptions." },
-    ]},
-
-    { id:"i_ref", marker:null, title:"Install Scoping & True Test (Reference)", kicker:"Reference", items:[
-      { id:"i_ref_1", text:"Use official training/materials as source of record.", detail:"This checklist is condensed for field use." },
-    ]},
-  ];
-
-  // Repair checklist (markers 1–5)
-  const REPAIR = [
-    { id:"r0", marker:null, title:"Safety First", kicker:"Before beginning work", items:[
-      { id:"r0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
-      { id:"r0_fvd", text:"Use a Foreign Voltage Detector (FVD) when conditions warrant before contacting metallic enclosures/terminals.", detail:"Treat circuits as energized until verified safe. Verify tool function per local guidance." },
-      { id:"r0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe (weather, pets, trip hazards, unsafe access)." }
-    ]},
-
-    { id:"r_pre", marker:null, title:"Pre-Call", kicker:"Before arriving", items:[
-      { id:"r_pre_1", text:"Review dispatch notes and customer history.", detail:"Outage type, intermittent, no sync, slow speeds, etc." },
-      { id:"r_pre_2", text:"Set expectations and confirm access.", detail:"Pets secured, access to equipment/ONT/gateway." },
-    ]},
-
-    { id:"r_m1", marker:1, title:"Dispatch, Preview & Contact", kicker:"Marker 1", items:[
-      { id:"r_m1_1", text:"Confirm the reported issue and service impacts.", detail:"Internet/TV/voice, intermittent vs down." },
-      { id:"r_m1_2", text:"Validate account/service order details.", detail:"Products, speeds, equipment model." },
-    ]},
-
-    { id:"r_m2", marker:2, title:"Greet & Understand", kicker:"Marker 2", items:[
-      { id:"r_m2_1", text:"Greet customer and restate issue in your own words.", detail:"Build confidence and verify symptoms." },
-      { id:"r_m2_2", text:"Check equipment placement/power/cabling quickly.", detail:"Gateway/ONT power, cords, physical damage." },
-    ]},
-
-    { id:"r_m3", marker:3, title:"Isolate & Resolve", kicker:"Marker 3", items:[
-      { id:"r_m3_1", text:"Perform isolation steps (inside/outside, line/equipment).", detail:"Use process to isolate: terminal drop, NID, ONT, gateway." },
-      { id:"r_m3_2", text:"Correct faults found (repair/replace/clean/terminate).", detail:"Document before/after readings." },
-    ]},
-
-    { id:"r_m4", marker:4, title:"Certify Products & Services", kicker:"Marker 4", items:[
-      { id:"r_m4_1", text:"Verify service stability and speeds (as applicable).", detail:"Confirm metrics and customer experience." },
-      { id:"r_m4_2", text:"Ensure apps/registrations are working.", detail:"Smart Home Manager or other required tools." },
-    ]},
-
-    { id:"r_m5", marker:5, title:"Verify, Thank & Close", kicker:"Marker 5", items:[
-      { id:"r_m5_1", text:"Review resolution with customer.", detail:"Explain what was found and what was done." },
-      { id:"r_m5_2", text:"Clean up and finalize notes.", detail:"Accurate documentation prevents repeat trouble calls." },
-    ]},
-  ];
-
-  // Marker display labels (used for badge captions)
-  const INSTALL_MARKER_LABELS = {
-    1: "GREET AND VERIFY",
-    2: "QUALIFY TO TERMINAL",
-    3: "SURVEY CUSTOMER AND PREMISES",
-    4: "EXTEND TO HOME",
-    5: "CONNECT TO GATEWAY",
-    6: "FINALIZE EXPERIENCE",
-    7: "VERIFY, THANK, AND CLOSE",
-  };
-  const REPAIR_MARKER_LABELS = {
-    1: "DISPATCH, PREVIEW & CONTACT",
-    2: "GREET & UNDERSTAND",
-    3: "ISOLATE & RESOLVE",
-    4: "CERTIFY PRODUCTS & SERVICES",
-    5: "VERIFY, THANK & CLOSE",
-  };
-
-  // -----------------------------
-  // Storage keys
-  // -----------------------------
-  const STORAGE_KEY = "afo_expertpath_v42_progress";
-  const STORAGE_MODE = "afo_expertpath_v42_mode";
-
-  // -----------------------------
-  // Helpers
-  // -----------------------------
-  const $ = (sel,root=document)=>root.querySelector(sel);
-  const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
-  const uid = ()=>Math.random().toString(36).slice(2,10);
-
-  function readState(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : {};
-    }catch(e){ return {}; }
-  }
-  function writeState(state){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
-  function getMode(){
-    const m = localStorage.getItem(STORAGE_MODE);
-    return m === "repair" ? "repair" : "install";
-  }
-  function setMode(mode){
-    localStorage.setItem(STORAGE_MODE, mode);
-  }
-
-  function isChecked(state, id){ return !!state[id]; }
-  function toggleChecked(state, id){ state[id] = !state[id]; }
-
-  function sectionComplete(state, sec){
-    if(!sec.items || !sec.items.length) return false;
-    return sec.items.every(it => isChecked(state, it.id));
-  }
-
-  function sectionItemCounts(state, sections){
-    let totalItems = 0, doneItems = 0;
-    let totalSecs = 0, doneSecs = 0;
-
-    for(const sec of sections){
-      totalSecs++;
-      const items = sec.items || [];
-      totalItems += items.length;
-      for(const it of items){
-        if(isChecked(state, it.id)) doneItems++;
-      }
-      if(items.length && items.every(it => isChecked(state, it.id))) doneSecs++;
-    }
-    return {totalItems, doneItems, totalSecs, doneSecs};
-  }
-
-  // -----------------------------
-  // Badge SVG (unified)
-  // -----------------------------
-  function teardropBadgeSVG(mode, markerOrText){
-    const isInstall = mode === "install";
-    const fill = isInstall ? "#1aa7d8" : "#8cc63e";
-    const stroke = isInstall ? "rgba(26,167,216,.55)" : "rgba(140,198,62,.55)";
-    const ribbonText = isInstall ? "FIBER INSTALL" : "FIBER REPAIR";
-    const val = String(markerOrText);
-
-    const big = val.length <= 2 ? 30 : 22;
-
-    return `
-      <svg class="miniBadge" viewBox="0 0 72 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <defs>
-          <pattern id="topo_${mode}_${val.replace(/[^a-z0-9]/gi,'')}" width="18" height="18" patternUnits="userSpaceOnUse">
-            <path d="M0 6 C4 2, 8 2, 18 6" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
-            <path d="M0 12 C6 8, 12 8, 18 12" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.1"/>
-            <path d="M3 0 C6 4, 6 8, 3 18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.0"/>
-          </pattern>
-        </defs>
-
-        <path d="M36 4 C52 4 64 16 64 34 C64 53 51 70 36 72 C21 70 8 53 8 34 C8 16 20 4 36 4 Z"
-              fill="rgba(255,255,255,.82)"
-              stroke="${stroke}" stroke-width="3"/>
-
-        <path d="M36 10 C48 10 58 20 58 34 C58 49 47 62 36 64 C25 62 14 49 14 34 C14 20 24 10 36 10 Z"
-              fill="${fill}" />
-
-        <path d="M36 10 C48 10 58 20 58 34 C58 49 47 62 36 64 C25 62 14 49 14 34 C14 20 24 10 36 10 Z"
-              fill="url(#topo_${mode}_${val.replace(/[^a-z0-9]/gi,'')})" opacity="0.9"/>
-
-        <text x="36" y="41" text-anchor="middle" font-size="${big}" font-weight="900" fill="white"
-              font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${val}</text>
-
-        <path d="M16 56 Q36 66 56 56"
-              fill="rgba(255,255,255,.86)" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
-        <text x="36" y="62" text-anchor="middle" font-size="9" font-weight="900"
-              fill="rgba(17,24,39,.75)" letter-spacing="1.1"
-              font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${ribbonText}</text>
-      </svg>`;
-  }
-
-  function miniBadgeSVG(mode, marker){
-    // marker number badge
-    return teardropBadgeSVG(mode, marker);
-  }
-
-  // -----------------------------
-  // Render
-  // -----------------------------
-  const main = $("#main");
-  const markerRail = $("#markerRail");
-  const btnInstall = $("#btnInstall");
-  const btnRepair = $("#btnRepair");
-  const modeText = $("#modeText");
-  const modeDot = $("#modeDot");
-  const modePill = $("#modePill");
-
-  const secDoneEl = $("#secDone");
-  const secTotalEl = $("#secTotal");
-  const itDoneEl = $("#itDone");
-  const itTotalEl = $("#itTotal");
-  const barFill = $("#barFill");
-
-  const whyBtn = $("#whyBtn");
-  const whyPanel = $("#whyPanel");
-
-  let mode = getMode();
-  let state = readState();
-
-  function getSectionsForMode(mode){
-    return mode === "install" ? [...VALUES, ...INSTALL] : [...VALUES, ...REPAIR];
-  }
-
-  function updateHeaderMode(){
-    btnInstall.classList.toggle("active", mode === "install");
-    btnRepair.classList.toggle("active", mode === "repair");
-    modeText.textContent = mode === "install" ? "Install" : "Repair";
-    modeDot.className = "smallDot " + (mode === "install" ? "blue" : "green");
-  }
-
-  function renderMarkerRail(sections){
-    markerRail.innerHTML = "";
-
-    const markerSecs = sections.filter(s => s.marker != null);
-
-    markerSecs.forEach(sec => {
-      const btn = document.createElement("button");
-      btn.className = "markerChip";
-      btn.type = "button";
-
-      const label = (mode==="install"
-        ? (INSTALL_MARKER_LABELS[sec.marker]||sec.title||"")
-        : (REPAIR_MARKER_LABELS[sec.marker]||sec.title||""));
-
-      btn.innerHTML = `${miniBadgeSVG(mode, sec.marker)}<div class="chipText"><div class="chipSub">${label}</div></div>`;
-
-      btn.addEventListener("click", () => {
-        const el = document.getElementById(sec.id);
-        if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-
-      markerRail.appendChild(btn);
-    });
-  }
-
-  function render(){
-    updateHeaderMode();
-
-    const sections = getSectionsForMode(mode);
-
-    // stats
-    const counts = sectionItemCounts(state, sections);
-    secDoneEl.textContent = counts.doneSecs;
-    secTotalEl.textContent = counts.totalSecs;
-    itDoneEl.textContent = counts.doneItems;
-    itTotalEl.textContent = counts.totalItems;
-    const pct = counts.totalItems ? Math.round((counts.doneItems / counts.totalItems) * 100) : 0;
-    barFill.style.width = pct + "%";
-
-    // marker rail
-    renderMarkerRail(sections);
-
-    // sections
-    main.innerHTML = "";
-    sections.forEach(sec => {
-      const secEl = document.createElement("section");
-      secEl.className = "section";
-      secEl.id = sec.id;
-
-      const head = document.createElement("div");
-      head.className = "secHead";
-
-      const badge = document.createElement("div");
-      badge.className = "secBadge";
-      const badgeText = sec.marker != null ? String(sec.marker) : (sec.badge || "");
-      badge.innerHTML = badgeText ? teardropBadgeSVG(mode, badgeText) : "";
-
-      const text = document.createElement("div");
-      text.className = "secText";
-      const kicker = document.createElement("div");
-      kicker.className = "kicker";
-      kicker.textContent = sec.kicker || (sec.marker!=null ? `MARKER ${sec.marker}` : "SECTION");
-
-      const title = document.createElement("div");
-      title.className = "title";
-      title.textContent = sec.title;
-
-      const subtitle = document.createElement("div");
-      subtitle.className = "subtitle";
-      subtitle.textContent = sec.subtitle || "";
-
-      text.appendChild(kicker);
-      text.appendChild(title);
-      if(subtitle.textContent) text.appendChild(subtitle);
-
-      const done = sectionComplete(state, sec);
-      const status = document.createElement("div");
-      status.className = "statusPill" + (done ? " done" : "");
-      status.innerHTML = `<span class="statusDot"></span> ${done ? "DONE" : "NOT DONE"}`;
-
-      const chev = document.createElement("div");
-      chev.className = "chev";
-      chev.innerHTML = `<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(231,238,247,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-      head.appendChild(badge);
-      head.appendChild(text);
-      head.appendChild(status);
-      head.appendChild(chev);
-
-      const body = document.createElement("div");
-      body.className = "secBody";
-
-      const items = document.createElement("div");
-      items.className = "items";
-
-      (sec.items || []).forEach(it => {
-        const itEl = document.createElement("div");
-        itEl.className = "item";
-
-        const row = document.createElement("div");
-        row.className = "itemRow";
-
-        const cb = document.createElement("div");
-        cb.className = "cb" + (isChecked(state, it.id) ? " checked" : "");
-        cb.innerHTML = `<svg viewBox="0 0 24 24" fill="none"><path d="M6 12l4 4 8-9" stroke="rgba(231,238,247,.95)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-        const txt = document.createElement("div");
-        txt.className = "text";
-        const line = document.createElement("div");
-        line.className = "line";
-        line.textContent = it.text;
-        txt.appendChild(line);
-
-        if(it.detail){
-          const det = document.createElement("div");
-          det.className = "detail";
-          det.textContent = it.detail;
-          txt.appendChild(det);
+<div class="wrap">
+
+<h1>AT&T Fiber Expert Path</h1>
+
+<div class="safety">
+Safety Reminder – PPE & FVD required before beginning work.
+</div>
+
+<div class="markerRail" id="markerRail"></div>
+
+<div id="sections"></div>
+
+</div>
+
+<script>
+const STORAGE_KEY = "expert_path_state";
+
+function saveState(state){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch{ return {}; }
+}
+
+let state = loadState();
+
+function badgeSVG(mode,num){
+  const color = mode==="install" ? "#1aa7d8" : "#8cc63e";
+  const text = mode==="install" ? "FIBER INSTALL" : "FIBER REPAIR";
+  return `
+  <svg viewBox="0 0 72 76">
+    <path d="M36 4 C52 4 64 16 64 34 C64 53 51 70 36 72 C21 70 8 53 8 34 C8 16 20 4 36 4 Z"
+      fill="${color}"/>
+    <text x="36" y="42" text-anchor="middle" font-size="30" fill="#fff" font-weight="900">${num}</text>
+    <text x="36" y="62" text-anchor="middle" font-size="9" fill="#fff">${text}</text>
+  </svg>`;
+}
+
+const DATA = [
+  {id:"m1", mode:"install", marker:1, title:"Greet & Verify", items:["Confirm order","Verify expectations"]},
+  {id:"m2", mode:"install", marker:2, title:"Qualify to Terminal", items:["Check signal","Confirm route"]},
+  {id:"r1", mode:"repair", marker:1, title:"Dispatch & Contact", items:["Review history","Confirm issue"]},
+  {id:"r2", mode:"repair", marker:2, title:"Isolate & Resolve", items:["Run isolation","Correct issue"]}
+];
+
+function render(){
+  const rail = document.getElementById("markerRail");
+  const sections = document.getElementById("sections");
+  rail.innerHTML="";
+  sections.innerHTML="";
+
+  DATA.forEach(sec=>{
+    const chip=document.createElement("div");
+    chip.className="markerChip";
+    chip.innerHTML=badgeSVG(sec.mode,sec.marker)+"<span>"+sec.title.toUpperCase()+"</span>";
+    chip.onclick=()=>document.getElementById(sec.id).scrollIntoView({behavior:"smooth"});
+    rail.appendChild(chip);
+
+    const detail=document.createElement("details");
+    detail.className="section";
+    detail.id=sec.id;
+    detail.open=state[sec.id+"_open"]||false;
+
+    const sum=document.createElement("summary");
+    sum.innerHTML='<div class="badge">'+badgeSVG(sec.mode,sec.marker)+'</div>'+sec.title+'<div class="status">NOT DONE</div>';
+
+    sum.onclick=(e)=>{
+      setTimeout(()=>{
+        state[sec.id+"_open"]=detail.open;
+        saveState(state);
+      },0);
+    };
+
+    detail.appendChild(sum);
+
+    sec.items.forEach((text,i)=>{
+      const id=sec.id+"_item_"+i;
+      const div=document.createElement("div");
+      div.className="item";
+      div.innerHTML='<input type="checkbox" id="'+id+'"><label for="'+id+'">'+text+'</label>';
+      const cb=div.querySelector("input");
+      cb.checked=state[id]||false;
+
+      cb.onclick=(e)=>{
+        e.stopPropagation();
+        state[id]=cb.checked;
+        saveState(state);
+
+        // force section to stay open
+        detail.open=true;
+        state[sec.id+"_open"]=true;
+        saveState(state);
+
+        // update status
+        const all=sec.items.every((_,j)=>state[sec.id+"_item_"+j]);
+        const status=sum.querySelector(".status");
+        if(all){
+          status.textContent="DONE";
+          status.classList.add("done");
         }
+      };
 
-        const tools = document.createElement("div");
-        tools.className = "itemTools";
-
-        const noteBtn = document.createElement("div");
-        noteBtn.className = "tinyBtn";
-        noteBtn.textContent = "Note";
-        const note = document.createElement("div");
-        note.className = "note";
-        note.contentEditable = "true";
-        note.setAttribute("spellcheck", "true");
-        note.dataset.noteFor = it.id;
-
-        // persist notes
-        const noteKey = "note:" + it.id;
-        const savedNote = localStorage.getItem(noteKey);
-        if(savedNote) { note.textContent = savedNote; note.classList.add("open"); }
-
-        note.addEventListener("input", () => localStorage.setItem(noteKey, note.textContent));
-
-        noteBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          note.classList.toggle("open");
-        });
-
-        tools.appendChild(noteBtn);
-
-        row.appendChild(cb);
-        row.appendChild(txt);
-        row.appendChild(tools);
-
-        itEl.appendChild(row);
-        itEl.appendChild(note);
-
-        cb.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleChecked(state, it.id);
-          writeState(state);
-          render();
-        });
-
-        items.appendChild(itEl);
-      });
-
-      body.appendChild(items);
-
-      secEl.appendChild(head);
-      secEl.appendChild(body);
-
-      head.addEventListener("click", () => {
-        secEl.classList.toggle("open");
-      });
-
-      main.appendChild(secEl);
+      detail.appendChild(div);
     });
 
-    const noteLine = document.createElement("div");
-    noteLine.className = "noteLine";
-    noteLine.textContent = "Note: Content is condensed for field use. Please use official AT&T training as the source of record.";
-    main.appendChild(noteLine);
-
-    const footer = document.createElement("div");
-    footer.className = "footer";
-    footer.innerHTML = `
-      <div class="left">Related Topics &amp; Resources</div>
-      <div style="opacity:.75;font-weight:850">Tap to expand</div>
-      <div style="flex-basis:100%;height:0"></div>
-      <div class="right">Build: v1.0 • Internal field checklist</div>
-      <div class="tip">Tip: Add to Home Screen for an “app-like” experience.</div>
-    `;
-    main.appendChild(footer);
-  }
-
-  // -----------------------------
-  // Actions
-  // -----------------------------
-  $("#btnExpand").addEventListener("click", () => {
-    $$(".section").forEach(s => s.classList.add("open"));
+    sections.appendChild(detail);
   });
-  $("#btnCollapse").addEventListener("click", () => {
-    $$(".section").forEach(s => s.classList.remove("open"));
-  });
+}
 
-  $("#btnReset").addEventListener("click", () => {
-    if(!confirm("Reset all progress?")) return;
-    state = {};
-    writeState(state);
-    // clear notes too
-    Object.keys(localStorage).forEach(k => { if(k.startsWith("note:")) localStorage.removeItem(k); });
-    render();
-  });
-
-  $("#btnCompleteClear").addEventListener("click", () => {
-    if(!confirm("Mark everything complete and then clear?")) return;
-    const sections = getSectionsForMode(mode);
-    sections.forEach(sec => (sec.items||[]).forEach(it => state[it.id] = true));
-    writeState(state);
-    setTimeout(() => {
-      state = {};
-      writeState(state);
-      render();
-    }, 350);
-  });
-
-  btnInstall.addEventListener("click", () => { mode="install"; setMode(mode); render(); });
-  btnRepair.addEventListener("click", () => { mode="repair"; setMode(mode); render(); });
-
-  whyBtn.addEventListener("click", () => {
-    const open = whyPanel.style.display === "block";
-    whyPanel.style.display = open ? "none" : "block";
-  });
-
-  // Init
-  render();
-  </script>
+render();
+</script>
 </body>
 </html>
