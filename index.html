@@ -1,238 +1,1581 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AT&T Fiber Expert Path</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AT&T Fiber • AFO — Expert Path Checklist</title>
+  <meta name="theme-color" content="#0b1620" />
+  <style>
+    :root{
+      --border:rgba(255,255,255,.14);
+  --installBlue:#2f7dd1;
+  --repairGreen:#6dbf45;
 
-<style>
-:root{
-  --bg:#0b1e2a;
-  --card:rgba(255,255,255,.06);
-  --stroke:rgba(255,255,255,.12);
-  --blue:#1aa7d8;
-  --green:#8cc63e;
-  --warn:#f59e0b;
-  --text:#e6eef7;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  background:linear-gradient(180deg,#08151f,#0f2c3c);
-  color:var(--text);
-}
-.wrap{max-width:950px;margin:auto;padding:18px}
-h1{margin-top:0}
-
-.safety{
-  border-left:6px solid var(--warn);
-  background:rgba(245,158,11,.15);
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:18px;
-  font-weight:700;
-}
-
-.progressWrap{margin:12px 0}
-.bar{
-  height:14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.14);
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.1);
-}
-.barFill{
-  height:100%;
-  width:0%;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--blue),var(--green));
-  transition:width .25s ease;
-}
-.progressText{
-  margin-top:6px;
-  font-size:12px;
-  font-weight:800;
+      --bg:#07121a;
+      --panel:#0c1c27;
+      --panel2:#0a1822;
+      --stroke:rgba(255,255,255,.10);
+      --text:#e9eef4;
+      --muted:rgba(233,238,244,.70);
+      --muted2:rgba(233,238,244,.55);
+      --blue:#1aa7e1;      /* AT&T Fiber accent */
+      --green:#79c142;     /* Repair / CODE accent */
+      --danger:#ff4d5e;
+      --pill:rgba(255,255,255,.08);
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 500px at 30% -10%, rgba(26,167,225,.22), transparent 65%),
+        radial-gradient(900px 500px at 90% 10%, rgba(121,193,66,.10), transparent 60%),
+        radial-gradient(900px 700px at 50% 120%, rgba(255,255,255,.05), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    /* Extra bottom padding so the last lines (notes, tips) are never hidden
+       behind mobile browser UI / safe-area insets. */
+    .wrap{max-width:920px;margin:0 auto;padding:22px 14px calc(92px + env(safe-area-inset-bottom))}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero{
+      padding:18px 18px 16px;
+      background:
+        radial-gradient(800px 280px at 20% 0%, rgba(26,167,225,.22), transparent 60%),
+        radial-gradient(700px 260px at 90% 10%, rgba(255,255,255,.10), transparent 62%),
+        rgba(12,28,39,.35);
+      border-bottom:1px solid var(--stroke);
+    }
+    .topline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:var(--pill);
+      border:1px solid var(--stroke);
+      font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+      color:rgba(233,238,244,.80);
+      white-space:nowrap;
+    }
+    .dot{width:9px;height:9px;border-radius:99px;background:var(--blue);box-shadow:0 0 0 3px rgba(26,167,225,.18)}
+    .pill.green .dot{background:var(--green);box-shadow:0 0 0 3px rgba(121,193,66,.18)}
+    .titleRow{display:flex;align-items:flex-start;gap:12px;margin-top:14px}
+    .logo{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;filter:drop-shadow(0 4px 16px rgba(0,0,0,.35));transform:translateY(0)}
+    .logo svg{width:40px;height:40px;display:block}
+    .logo svg{opacity:.95}
+    #appTitle.title{font-size:32px;line-height:1.02;margin:0;letter-spacing:.4px}
+.title--repair{
+  font-family: Georgia, 'Times New Roman', serif;
   letter-spacing:.08em;
   text-transform:uppercase;
+  color:var(--repairGreen);
+}
+.title--install{
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  letter-spacing:0;
+  color:var(--text);
+}
+.title--install .fiber{color:var(--installBlue);font-weight:800}
+.title--install .ep{color:var(--installBlue);font-weight:700}
+.title--install .att{font-weight:800;letter-spacing:.02em}
+
+    .sub{margin-top:6px;color:var(--muted);max-width:62ch}
+    .sub strong{color:rgba(233,238,244,.86)}
+    .controls{
+      padding:14px 18px 16px;
+      display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+      border-bottom:1px solid var(--stroke);
+      background:rgba(12,28,39,.22);
+    }
+    .seg{
+      display:inline-flex;
+      padding:6px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      gap:6px;
+    }
+    .seg button{
+      appearance:none;border:none;cursor:pointer;
+      padding:10px 16px;border-radius:999px;
+      background:transparent;color:rgba(233,238,244,.78);
+      font-weight:700;letter-spacing:.02em;
+      transition:all .15s ease;
+    }
+    .seg button[aria-pressed="true"]{
+      background:rgba(255,255,255,.10);
+      color:var(--text);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+    }
+    .wip{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px dashed rgba(255,255,255,.18);
+      color:rgba(233,238,244,.55);
+      font-weight:700;
+      user-select:none;
+    }
+    .wip .dot{background:rgba(233,238,244,.25);box-shadow:none}
+    .modePill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      color:rgba(233,238,244,.75);
+      font-weight:700;
+    }
+    .modePill .dot{background:var(--blue)}
+    .modePill.repair .dot{background:var(--green)}
+    .stats{
+      padding:14px 18px 0;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      padding:12px 14px;
+      display:flex;justify-content:space-between;align-items:flex-end;
+    }
+    .stat .lbl{color:var(--muted2);font-size:13px}
+    .stat .val{font-size:26px;font-weight:900;letter-spacing:.02em}
+    .actions{
+      padding:12px 18px 18px;
+      display:flex;gap:10px;flex-wrap:wrap;
+    }
+    
+      .markerRail{
+        display:flex;
+        gap:10px;
+        align-items:center;
+        overflow-x:auto;
+        padding:10px 14px;
+        margin:10px 14px 0;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.60);
+        backdrop-filter: blur(6px);
+        border-radius:16px;
+        scroll-snap-type:x mandatory;
+      }
+      .markerRail::-webkit-scrollbar{height:8px}
+      .markerRail::-webkit-scrollbar-thumb{background:rgba(2,132,199,.35);border-radius:999px}
+      .markerChip{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        padding:8px 10px;
+        border-radius:999px;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.78);
+        color:var(--text);
+        cursor:pointer;
+        white-space:nowrap;
+        scroll-snap-align:start;
+        transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+        user-select:none;
+      }
+    .chipSub{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.1;opacity:.75;max-width:132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+      .markerChip:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(16,24,40,.12);border-color:rgba(2,132,199,.35)}
+      .markerChip:active{transform:translateY(0)}
+      .markerChip .miniBadge{width:30px;height:30px;flex:0 0 auto}
+      .markerChip .miniText{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.02em}
+.btn{
+      appearance:none;border:none;cursor:pointer;
+      padding:12px 16px;border-radius:16px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      color:rgba(233,238,244,.90);
+      font-weight:800;
+    }
+    .btn.danger{
+      border-color:rgba(255,77,94,.35);
+      background:rgba(255,77,94,.08);
+      color:rgba(255,220,224,.95);
+    }
+    .btn:active{transform:translateY(1px)}
+    .section{
+      margin-top:14px;
+      border-top:1px solid var(--stroke);
+    }
+    .section:first-of-type{border-top:none}
+    details{
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    details[open]{background:rgba(255,255,255,.01)}
+    summary{
+      list-style:none;
+      padding:16px 18px;
+      display:flex;align-items:center;gap:12px;
+      cursor:pointer;
+    }
+    summary::-webkit-details-marker{display:none}
+    .chev{
+      width:28px;height:28px;border-radius:10px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      flex:0 0 auto;
+    }
+    .badgeWrap{width:40px;height:40px;flex:0 0 auto;display:grid;place-items:center}
+    .sumText{flex:1 1 auto;min-width:0}
+    .kicker{color:var(--muted2);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+    .name{font-size:18px;font-weight:900;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .statusPill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:999px;
+      background:rgba(255,77,94,.10);
+      border:1px solid rgba(255,77,94,.30);
+      color:rgba(255,220,224,.98);
+      font-weight:900;
+      flex:0 0 auto;
+      white-space:nowrap;
+    }
+    .statusPill.done{border-color:rgba(121,193,66,.55); background:rgba(121,193,66,.12);}
+    .statusPill.done span:last-child{color:rgba(225,255,235,.98);}
+    .statusDot.done{background:var(--green); box-shadow:0 0 0 3px rgba(121,193,66,.18);}
+
+    .statusDot{width:10px;height:10px;border-radius:99px;background:var(--danger);box-shadow:0 0 0 4px rgba(255,77,94,.14)}
+    .body{padding:0 18px 16px}
+    .hint{color:var(--muted2);margin:0 0 12px}
+    .items{display:grid;gap:10px}
+    .item{
+      display:flex;gap:12px;align-items:flex-start;
+      background:rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      padding:12px 12px;
+    }
+    input[type="checkbox"]{
+      width:22px;height:22px;margin-top:2px;
+      accent-color: var(--blue);
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .repairMode input[type="checkbox"]{accent-color: var(--green);}
+    .itemText{min-width:0}
+    .itemTitle{font-weight:800}
+    .itemDetail{color:var(--muted2);font-size:13px;margin-top:3px}
+    .codeBlock{
+      margin:18px;
+      border-radius:22px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+    .codeHead{
+      padding:14px 16px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .codeHead .t{font-weight:900;letter-spacing:.02em}
+    .codeHead .s{color:var(--muted2)}
+    .codeGrid{
+      padding:14px 16px 16px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .codeCard{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(0,0,0,.14);
+      padding:14px;
+      display:flex;gap:12px;align-items:center;
+    }
+    .codeIcon{
+      width:44px;height:44px;border-radius:14px;
+      display:grid;place-items:center;
+      border:2px solid var(--green);
+      background:#0b1214;
+      color:#fff;font-weight:1000;
+      letter-spacing:.04em;
+      flex:0 0 auto;
+    }
+    .codeCard .big{font-weight:950}
+    .codeCard .small{color:var(--muted2);font-size:13px;margin-top:3px}
+    .footer{
+      margin-top:16px;
+      padding:14px 16px;
+      color:rgba(233,238,244,.55);
+      font-size:12px;
+      text-align:center;
+    }
+.refs{
+  margin:14px 0 6px;
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+}
+.refs > summary{
+  list-style:none;
+  cursor:pointer;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  user-select:none;
+}
+.refs > summary::-webkit-details-marker{display:none}
+.refsTitle{font-weight:850;letter-spacing:.02em}
+.refsHint{color:var(--muted);font-size:12px}
+.refsBody{padding:10px 14px 14px}
+.refsGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:720px){ .refsGrid{grid-template-columns:1fr} }
+.refItem{
+  display:block;
+  padding:10px 12px;
+  border:1px solid var(--stroke);
+  border-radius:14px;
+  text-decoration:none;
+  color:var(--text);
+  background:rgba(0,0,0,.18);
+}
+.refItem:active{transform:translateY(1px)}
+.refTitle{font-weight:800}
+.refDesc{color:var(--muted);font-size:12px;margin-top:4px}
+
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;}
+    @media (max-width:720px){
+      h1{font-size:28px}
+      .stats{grid-template-columns:1fr}
+      .codeGrid{grid-template-columns:1fr}
+    }
+  
+/* Scoping / Cleaning / True Test callouts */
+.refBox{
+  margin-top:12px;
+  padding:12px 12px;
+  border:1px solid rgba(74, 226, 142, .38);
+  background:rgba(10, 28, 20, .35);
+  border-radius:16px;
+}
+.refBox h4{
+  margin:0 0 8px 0;
+  font-size:14px;
+  letter-spacing:.2px;
+}
+.refBox ul{margin:0 0 0 18px; padding:0;}
+.refBox li{margin:6px 0; color:rgba(255,255,255,.88); line-height:1.25;}
+.refBox .refNote{margin-top:8px; color:rgba(255,255,255,.72); font-size:12px;}
+.refTag{
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:999px;
+  font-size:11px;
+  letter-spacing:.25px;
+  border:1px solid rgba(74, 226, 142, .45);
+  background:rgba(74, 226, 142, .12);
+  color:rgba(255,255,255,.92);
+  margin-right:6px;
 }
 
-.markerRail{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  padding:12px;
-  border-radius:18px;
-  background:rgba(255,255,255,.15);
-  margin-bottom:18px;
+    /* CODE expandable panels */
+    .codePanels{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+    details.codePanel{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      overflow:hidden;
+    }
+    details.codePanel[open]{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(26,167,225,.35);
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
+    details.codePanel summary{
+      list-style:none;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 14px;
+      user-select:none;
+    }
+    details.codePanel summary::-webkit-details-marker{display:none}
+    .codeIcon{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+    }
+    .codeIcon.greenRing{outline:3px solid rgba(121,193,66,.75); outline-offset:-3px}
+    .codeIcon.blueRing{outline:3px solid rgba(26,167,225,.85); outline-offset:-3px}
+    .codeSum{
+      display:flex;flex-direction:column;gap:2px;min-width:0
+    }
+    .codeSum .big{font-weight:800}
+    .codeSum .small{color:var(--muted);font-size:13px}
+    .chev{
+      margin-left:auto;color:var(--muted2);font-weight:800
+    }
+    details.codePanel[open] .chev{transform:rotate(180deg)}
+    .codeBody{
+      padding:0 16px 16px 16px;
+      color:var(--text);
+    }
+    .codeBody p{margin:10px 0;color:var(--muted)}
+    .codeBody h4{margin:14px 0 8px 0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:rgba(233,238,244,.85)}
+    .codeBody ul{margin:8px 0 0 18px;color:var(--muted)}
+    .codeBody li{margin:6px 0}
+
+  .flash{outline:2px solid rgba(0,0,0,.18); outline-offset:4px; border-radius:14px;}
+
+
+/* Safety callout */
+.safety{
+      margin:14px 0 12px;
+      border:1px solid rgba(255,255,255,.14);
+      border-left:6px solid #f59e0b;
+      background: linear-gradient(180deg, rgba(245,158,11,.16), rgba(12,28,39,.35));
+      border-radius:14px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .safetyHdr{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 14px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .safetyIcon{
+      width:26px;height:26px;border-radius:999px;
+      display:inline-flex;align-items:center;justify-content:center;
+      background:rgba(245,158,11,.22);
+      border:1px solid rgba(245,158,11,.55);
+      font-size:16px;
+      flex:0 0 auto;
+    }
+    .safetyBody{padding:0 14px 12px;color:var(--text)}
+    .safetyBody p{margin:8px 0;color:rgba(233,238,244,.92);line-height:1.35}
+    .safetyBody strong{color:#fff}
+    .safety details{margin-top:8px}
+    .safety summary{
+      cursor:pointer;
+      color:rgba(233,238,244,.92);
+      font-weight:700;
+      list-style:none;
+    }
+    .safety summary::-webkit-details-marker{display:none}
+    .safety summary:after{
+      content:"  ▾";
+      opacity:.85;
+      font-weight:800;
+    }
+    .safety details[open] summary:after{content:"  ▴";}
+    .safety ul{margin:8px 0 0 18px;color:rgba(233,238,244,.88)}
+    .safety li{margin:6px 0}
+
+
+
+/* === Phase 2 Theme: Safety Accent (Orange) === */
+:root{
+  --accent:#ffb020;
+  --accent2:#ff7a18;
+  --accentGlow:rgba(255,176,32,.24);
 }
+.header .modeToggle input:checked + label,
+.modeToggle input:checked + label{
+  border-color:var(--accent);
+  box-shadow:0 0 0 2px var(--accentGlow) inset;
+}
+.btn{
+  border-color:rgba(255,255,255,.18);
+}
+.btn:hover{
+  border-color:rgba(255,255,255,.30);
+  box-shadow:0 10px 30px rgba(0,0,0,.25), 0 0 0 2px var(--accentGlow) inset;
+}
+.btn.danger{
+  border-color:rgba(255,122,24,.35);
+}
+.markerRail .pill{
+  border-color:rgba(255,255,255,.18);
+}
+.markerRail .pill.active{
+  border-color:rgba(0,0,0,.25);
+  background:linear-gradient(180deg, rgba(255,176,32,.95), rgba(255,122,24,.9));
+  color:#1a1208;
+}
+.markerRail .pill.safetyChip{
+  border-color:rgba(255,176,32,.45);
+}
+.markerRail .pill.safetyChip.active{
+  background:linear-gradient(180deg, rgba(255,176,32,.95), rgba(255,122,24,.9));
+}
+.section{
+  border-color:rgba(255,255,255,.14);
+}
+.section:hover{
+  border-color:rgba(255,255,255,.22);
+}
+/* Safety section category highlight */
+.section.safety{
+  border-color:rgba(255,176,32,.45);
+  box-shadow:0 0 0 1px rgba(255,176,32,.10) inset, 0 16px 40px rgba(0,0,0,.35);
+}
+.section.safety .secBadge{
+  border-color:rgba(255,176,32,.60);
+}
+.section.safety .secBadge span{
+  color:#1a1208;
+}
+.section.safety .head{
+  background:linear-gradient(180deg, rgba(255,176,32,.12), rgba(255,122,24,.06));
+}
+
+
+
+/* --- v40: Marker rail + section badge sizing/layout fixes --- */
+
+/* Make the marker rail pills look intentional (badge left, label centered/stacked) */
+.markerRail{padding:10px 12px;background:rgba(255,255,255,.22);border-radius:18px}
 .markerChip{
   display:flex;
-  gap:10px;
+  flex-direction:row;
   align-items:center;
-  background:#fff;
-  border-radius:40px;
-  padding:10px 16px;
+  justify-content:flex-start;
+  gap:12px;
+  padding:10px 14px;
   min-width:220px;
-  border:1px solid #ccc;
-  cursor:pointer;
+  max-width:260px;
 }
-.markerChip span{
-  color:#0f172a;
-  font-weight:800;
-  font-size:12px;
+@media (max-width:520px){
+  .markerChip{min-width:190px;max-width:230px}
 }
 
-.section{
-  background:var(--card);
-  border:1px solid var(--stroke);
-  border-radius:20px;
-  margin-top:14px;
+/* Bigger badge in the marker rail */
+.markerChip .miniBadge{
+  width:54px;
+  height:54px;
+  flex:0 0 auto;
+}
+
+/* Rail label: allow wrap to 2 lines and keep readable */
+.markerChip .chipSub{
+  max-width:160px;
+  white-space:normal;
   overflow:hidden;
-}
-.section summary{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:16px;
-  cursor:pointer;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  text-overflow:ellipsis;
+  opacity:.85;
+  font-size:11px;
   font-weight:900;
+  letter-spacing:.06em;
+  line-height:1.15;
 }
-.section .badge svg{width:54px;height:54px}
-.status{
-  margin-left:auto;
-  font-size:12px;
-  padding:6px 12px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.2);
-}
-.status.done{background:rgba(34,197,94,.2)}
 
-.item{
-  padding:12px 16px;
-  border-top:1px solid var(--stroke);
-  display:flex;
-  gap:12px;
+/* Give rail items a subtle inner border so the long pill doesn't look empty */
+.markerChip{
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset;
 }
-.item input{width:20px;height:20px}
+.markerChip:hover{transform:translateY(-1px)}
+
+/* Section header badges (inside each section row) slightly larger + aligned */
+.section .miniBadge, .secBadge .miniBadge, .sectionBadge .miniBadge{
+  width:46px;
+  height:46px;
+}
+@media (max-width:520px){
+  .section .miniBadge, .secBadge .miniBadge, .sectionBadge .miniBadge{width:42px;height:42px}
+}
+
+/* Ensure badge + text align nicely in section headers */
+.sectionHeader, .secHead, .sectionTop{
+  align-items:center;
+}
+
+.chipText{display:flex;flex-direction:column;gap:2px;min-width:0}
+
+/* --- v41: Improve marker text readability + larger section badges --- */
+
+/* Stronger marker chip text contrast */
+.markerChip{
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(0,0,0,.18);
+}
+
+.markerChip .chipSub{
+  color:#0f172a;           /* darker text */
+  opacity:1;               /* remove transparency */
+  font-weight:900;
+  text-shadow:none;
+}
+
+/* Make marker badge number slightly larger */
+.markerChip .miniBadge{
+  width:60px;
+  height:60px;
+}
+
+/* Increase section header badge size */
+.section .miniBadge,
+.secBadge .miniBadge,
+.sectionBadge .miniBadge{
+  width:56px;
+  height:56px;
+}
+
+@media (max-width:520px){
+  .section .miniBadge,
+  .secBadge .miniBadge,
+  .sectionBadge .miniBadge{
+    width:50px;
+    height:50px;
+  }
+}
+
+
+
+/* --- v44: Progress bar --- */
+.progressWrap{margin-top:12px}
+.bar{height:14px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;border:1px solid rgba(255,255,255,.10)}
+.bar>div{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg, rgba(26,167,216,.95), rgba(140,198,62,.92));transition:width .25s ease}
+.progressMeta{margin-top:6px;color:rgba(231,238,247,.70);font-weight:850;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
 </style>
 </head>
-
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <div class="card" id="app">
+      <div class="hero">
+        <div class="topline">
+          <span class="pill"><span class="dot" style="background:rgba(233,238,244,.25);box-shadow:none"></span> AFO</span>
+          <span class="pill"><span class="dot" style="background:rgba(233,238,244,.25);box-shadow:none"></span> <span class="mono" id="versionPill">BETA • FIELD TEST</span></span>
+        </div>
 
-<h1>AT&T Fiber Expert Path</h1>
+        <div class="titleRow">
+          <div class="logo" aria-hidden="true" title="AT&T">
+            <!-- Globe icon (inline SVG) -->
+            <svg width="44" height="44" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <defs>
+                <radialGradient id="gGlow" cx="35%" cy="30%" r="80%">
+                  <stop offset="0%" stop-color="#38bdf8"/>
+                  <stop offset="100%" stop-color="#0284c7"/>
+                </radialGradient>
+                <clipPath id="gClip"><circle cx="32" cy="32" r="26"/></clipPath>
+              </defs>
+              <circle cx="32" cy="32" r="26" fill="url(#gGlow)"/>
+              <g clip-path="url(#gClip)" opacity="0.95">
+                <path d="M6 24 C18 18, 46 18, 58 24" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+                <path d="M4 32 C18 27, 46 27, 60 32" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+                <path d="M6 40 C18 46, 46 46, 58 40" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+                <path d="M10 16 C22 10, 42 10, 54 16" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+                <path d="M10 48 C22 54, 42 54, 54 48" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+              </g>
+              <circle cx="32" cy="32" r="26" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.8"/>
+            </svg>
+          </div>
+          <div>
+            <h1 id="appTitle" class="title title--install">AT&amp;T <span class="fiber">fiber</span> <span class="ep">Expert Path</span></h1>
+            <div class="sub"><strong>AFO</strong> — Expert Path Checklist. Tap checkboxes as you complete steps. Progress saves automatically on this device.</div>
+          </div>
+        </div>
+        <div class="heroDivider" aria-hidden="true"></div>
+      </div>
 
-<div class="safety">
-Safety Reminder – PPE & FVD required before beginning work.
-</div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Mode">
+          <button id="btnInstall" aria-pressed="true" type="button">Install</button>
+          <button id="btnRepair" aria-pressed="false" type="button">Repair</button>
+        </div>
+        <div class="wip" title="Work in progress (not active yet)">
+          <span class="dot"></span>
+          Wi‑Fi Extenders (WIP)
+        </div>
+        <div class="modePill" id="modePill"><span class="dot"></span> <span id="modeText">Mode: Install</span></div>
+      </div>
 
-<div class="progressWrap">
-  <div class="bar">
-    <div class="barFill" id="barFill"></div>
+
+      <div class="safety" role="note" aria-label="Safety reminder">
+        <div class="safetyHdr">
+          <span class="safetyIcon" aria-hidden="true">⚠️</span>
+          Safety Reminder — PPE &amp; FVD (Foreign Voltage Detector)
+        </div>
+        <div class="safetyBody">
+          <p><strong>PPE:</strong> Wear all required PPE for the job function (and any local/site requirements) before starting work.</p>
+          <p><strong>FVD:</strong> Use a Foreign Voltage Detector when conditions warrant before contacting metallic enclosures/terminals. Treat circuits as energized until verified safe.</p>
+          <details>
+            <summary>Why this matters</summary>
+            <ul>
+              <li>Foreign voltage can exist on customer wiring/plant and may not be obvious.</li>
+              <li>Verifying safety first reduces shock risk and prevents equipment damage.</li>
+              <li>Builds customer trust: safe, professional, consistent field behavior.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="lbl">Sections done</div>
+          <div class="val"><span id="secDone">0</span> / <span id="secTotal">0</span></div>
+        </div>
+        <div class="stat">
+          <div class="lbl">Items done</div>
+          <div class="val"><span id="itemDone">0</span> / <span id="itemTotal">0</span></div>
+        </div>
+    </div>
+
+    <div class="markerRail" id="markerRail" aria-label="Marker quick navigation"></div>
+
+    
+
+            <div class="progressWrap" aria-label="Overall progress">
+              <div class="bar"><div id="barFill"></div></div>
+              <div class="progressMeta"><span id="pctText">0%</span> complete</div>
+            </div>
+<div class="actions">
+        <button class="btn" id="expandAll" type="button">Expand all</button>
+        <button class="btn" id="collapseAll" type="button">Collapse all</button>
+        <button class="btn danger" id="reset" type="button">Reset progress</button>
+        <button class="btn" id="completeClear" type="button" title="Mark all items complete then clear (useful at job close)">Complete &amp; Clear</button>
+      </div>
+
+      
+          <div class="codeBlock">
+      <div class="codePanels">
+        <details class="codePanel">
+      <summary>
+        <div class="codeIcon greenRing">C</div>
+        <div class="codeSum">
+          <div class="big">Care for Customers and Each Other</div>
+          <div class="small">Make it personal • Lead with respect &amp; safety</div>
+        </div>
+        <div class="chev">⌄</div>
+      </summary>
+      <div class="codeBody">
+        <p>AT&amp;T’s focus is always to serve customers first. When you Care for Customers and Each Other, you Make It Personal—show empathy, treat people with value and respect, and build trust.</p>
+<p>Put yourself in the customer’s shoes. Recognize the difference between sympathy and empathy so you can see the situation from the customer’s point of view—especially when invited into a customer’s premises.</p>
+<h4>Key ways to personalize the experience</h4>
+<ul>
+  <li>Be a good listener, show empathy, and adjust your tone based on how the customer feels.</li>
+  <li>Respect customers and their individual differences.</li>
+  <li>Treat customers the way you want to be treated.</li>
+  <li>Ask thoughtful questions to understand the customer’s needs.</li>
+</ul>
+      </div>
+    </details>
+        <details class="codePanel">
+      <summary>
+        <div class="codeIcon greenRing">O</div>
+        <div class="codeSum">
+          <div class="big">Own It</div>
+          <div class="small">Own the complexity • Make it simple for customers</div>
+        </div>
+        <div class="chev">⌄</div>
+      </summary>
+      <div class="codeBody">
+        <p>Owning It means being committed to finding the right solution for each customer—listen, anticipate needs, solve problems, and deliver outcomes that positively impact customers’ lives.</p>
+<p>You Own It when you hold yourself accountable for delivering excellence and operating with integrity every day. Focus your message on the resolution to build customer confidence.</p>
+<h4>How to take ownership (confidently &amp; effectively)</h4>
+<ul>
+  <li>Listen to the customer’s needs first.</li>
+  <li>Ask insightful questions to confirm understanding.</li>
+  <li>Understand the issue and set realistic expectations.</li>
+  <li>Commit to finding the solution.</li>
+  <li>Keep it positive and focus on the resolution.</li>
+</ul>
+      </div>
+    </details>
+        <details class="codePanel">
+      <summary>
+        <div class="codeIcon greenRing">D</div>
+        <div class="codeSum">
+          <div class="big">Deliver with Expertise</div>
+          <div class="small">Be authentic • Do it right, document it right</div>
+        </div>
+        <div class="chev">⌄</div>
+      </summary>
+      <div class="codeBody">
+        <p>Bring your own personality and professional integrity into the customer relationship. When you’re the expert, you can simplify the experience and communicate a clear plan of action.</p>
+<p>Customers appreciate honesty and clear communication. Use what the customer tells you to develop a customer‑centric solution.</p>
+<h4>Ways to deliver with expertise</h4>
+<ul>
+  <li>Connect with the customer and bring your personality into the conversation.</li>
+  <li>Take ownership and commit to the solution.</li>
+  <li>Educate the customer on tools/services that enhance the experience (e.g., Smart Home Manager, extenders).</li>
+  <li>Manage expectations and clearly identify the plan.</li>
+  <li>Use available tools so you’re prepared for anything; offer solutions whenever possible.</li>
+</ul>
+      </div>
+    </details>
+        <details class="codePanel">
+      <summary>
+        <div class="codeIcon greenRing">E</div>
+        <div class="codeSum">
+          <div class="big">Exceed Expectations</div>
+          <div class="small">Make it matter • Create “wow” moments</div>
+        </div>
+        <div class="chev">⌄</div>
+      </summary>
+      <div class="codeBody">
+        <p>Exceeding expectations means Making It Matter—putting the customer first and looking for opportunities to surprise and delight with exceptional service.</p>
+<p>A “wow” moment can be a gesture, solution, or act of service that helps the customer feel valued and supported.</p>
+<h4>Ways to exceed expectations</h4>
+<ul>
+  <li>Review the customer profile.</li>
+  <li>Use the customer’s name during interactions.</li>
+  <li>Sincerely thank the customer for being loyal to AT&amp;T.</li>
+  <li>Ask about the customer’s experience to help manage expectations.</li>
+  <li>Go the extra mile to create “wow” moments.</li>
+</ul>
+      </div>
+    </details>
+        <details class="codePanel">
+      <summary>
+        <div class="codeIcon blueRing">CC</div>
+        <div class="codeSum">
+          <div class="big">Crucial Conversations</div>
+          <div class="small">De-escalate • Own it • Build trust</div>
+        </div>
+        <div class="chev">⌄</div>
+      </summary>
+      <div class="codeBody">
+        <p>Handling crucial conversations well improves performance and builds confidence to Own It in any situation.</p>
+
+<h4>What’s true in crucial conversations</h4>
+<ul>
+  <li>The customer’s perception is their reality.</li>
+  <li>Customers are not focused on internal AT&amp;T day‑to‑day challenges (scheduling, inventory, system issues).</li>
+  <li>Active listening is essential to Owning It and handling the conversation.</li>
+  <li>You are empowered to improve the customer’s perception by Owning It and doing the right thing.</li>
+</ul>
+
+<h4>Listening Do’s</h4>
+<ul>
+  <li>Give your undivided attention to the customer who is speaking.</li>
+  <li>Show that you understand with brief confirmations.</li>
+  <li>Listen for underlying needs in what the customer says.</li>
+  <li>Ask questions that encourage the customer to clarify their thoughts.</li>
+  <li>Summarize the main points from time to time.</li>
+</ul>
+
+<h4>Listening Don’ts</h4>
+<ul>
+  <li>Don’t assume you know the issue or the customer’s experience.</li>
+  <li>Don’t interrupt the customer.</li>
+  <li>Don’t start telling your own stories or change the focus to yourself.</li>
+  <li>Don’t give advice, judge, divert the topic, or try to cheer the customer up instead of listening.</li>
+  <li>Don’t give your attention to anything/anyone other than the customer while they are sharing concerns.</li>
+</ul>
+      </div>
+    </details>
+      </div>
+      <div class="note" style="margin-top:10px;opacity:.85;font-size:12px">
+        Note: Content is condensed for field use. Please use official AT&amp;T training as the source of record.
+      </div>
+    </div>
+
+
+      <div id="sections"></div>
+
+<details id="refsPanel" class="refs">
+  <summary>
+    <span class="refsTitle">Related Topics & Resources</span>
+    <span class="refsHint" id="refsHint">Tap to expand</span>
+  </summary>
+  <div class="refsBody" id="refsBody"></div>
+</details>
+
+      <div class="footer">
+        <div><span class="mono" id="buildStamp">Build: v1.2 • Internal field checklist</span></div>
+        <div style="margin-top:6px">Tip: Add to Home Screen for an “app-like” experience.</div>
+      </div>
+    </div>
   </div>
-  <div class="progressText"><span id="progressPercent">0%</span> Complete</div>
-</div>
-
-<div class="markerRail" id="markerRail"></div>
-<div id="sections"></div>
-
-</div>
 
 <script>
-const STORAGE_KEY="expert_path_state";
-let state=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
+(() => {
+  "use strict";
 
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
+  /* ---------- Version / Build ---------- */
+  const BUILD = "v1.0";
+  document.getElementById("buildStamp").textContent = `Build: ${BUILD} • Internal field checklist`;
 
-function badgeSVG(mode,num){
-  const color=mode==="install"?"#1aa7d8":"#8cc63e";
+  /* ---------- Badge SVG ---------- */
+  function badgeSVG(n, mode){
+    const isInstall = mode === "install";
+    const fill = isInstall ? "#1aa7d8" : "#8cc63e";
+    const stroke = isInstall ? "rgba(26,167,216,.55)" : "rgba(140,198,62,.55)";
+    const ribbonText = isInstall ? "FIBER INSTALL" : "FIBER REPAIR";
+    const txt = String(n);
+    const fs = txt.length >= 2 ? 22 : 30;
+    const y = txt.length >= 2 ? 42 : 41;
+    // Unified teardrop badge for ALL section icons (matches marker badge style)
+    return `
+      <svg class="miniBadge" viewBox="0 0 72 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="topo_sec_${mode}_${txt.replace(/[^a-z0-9]/gi,'')}" width="18" height="18" patternUnits="userSpaceOnUse">
+            <path d="M0 6 C4 2, 8 2, 18 6" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+            <path d="M0 12 C6 8, 12 8, 18 12" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.1"/>
+            <path d="M3 0 C6 4, 6 8, 3 18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.0"/>
+          </pattern>
+        </defs>
+
+        <path d="M36 4
+                 C52 4 64 16 64 34
+                 C64 53 51 70 36 72
+                 C21 70 8 53 8 34
+                 C8 16 20 4 36 4 Z"
+              fill="rgba(255,255,255,.82)"
+              stroke="${stroke}" stroke-width="3"/>
+
+        <path d="M36 10
+                 C48 10 58 20 58 34
+                 C58 49 47 62 36 64
+                 C25 62 14 49 14 34
+                 C14 20 24 10 36 10 Z"
+              fill="${fill}" />
+
+        <path d="M36 10
+                 C48 10 58 20 58 34
+                 C58 49 47 62 36 64
+                 C25 62 14 49 14 34
+                 C14 20 24 10 36 10 Z"
+              fill="url(#topo_sec_${mode}_${txt.replace(/[^a-z0-9]/gi,'')})" opacity="0.9"/>
+
+        <text x="36" y="${y}" text-anchor="middle" font-size="${fs}" font-weight="900" fill="white"
+              font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${txt}</text>
+
+        <path d="M16 56 Q36 66 56 56"
+              fill="rgba(255,255,255,.86)" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+        <text x="36" y="62" text-anchor="middle" font-size="9" font-weight="900"
+              fill="rgba(17,24,39,.75)" letter-spacing="1.1"
+              font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${ribbonText}</text>
+      </svg>
+    `;
+  }
+
+
+  /* ---------- Data ---------- */
+  // NOTE: Avoid property names like "sub" to prevent collisions with String.prototype.sub in some render paths.
+  const INSTALL = [
+    
+    // SAFETY FIRST (non-marker)
+{ id:"i0", marker:null, title:"Safety First", kicker:"Before beginning work", items:[
+  { id:"i0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
+  { id:"i0_fvd", text:"Use a Foreign Voltage Detector (FVD) when conditions warrant before contacting metallic enclosures/terminals.", detail:"Treat circuits as energized until verified safe. Verify tool function per local guidance." },
+  { id:"i0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe (weather, pets, trip hazards, unsafe access)." }
+]},
+
+    { id:"precall", marker:null, title:"Pre-Call", kicker:"", items:[
+      { id:"precall_1", text:"Perform Pre-Call within 15 min of dispatching by calling the CBR.", detail:"If no answer, leave a voicemail and send a text message." }
+    ]},
+    { id:"m1", marker:1, title:"Greet & Verify", kicker:"Marker 1", items:[
+      { id:"m1_1", text:"Greet the customer.", detail:"Confirm availability for duration of install and confirm SHM app is downloaded." }
+    ]},
+    { id:"m2", marker:2, title:"Qualify to Terminal", kicker:"Marker 2", items:[
+      { id:"m2_1", text:"At PFP turn Optimeter ON.", detail:"Select appropriate scope link in Atlas." },
+      { id:"m2_2", text:"Select direction Splitter → ONT.", detail:"Set location to Splitter." },
+      { id:"m2_3", text:"Scope shutter jumper, APN and Port.", detail:"Perform scoping without leaving Viavi/EXFO app." },
+      { id:"m2_4", text:"Perform True Test from assigned APN.", detail:"Document results." },
+      { id:"m2_5", text:"Confirm scoping and True Tests uploaded to LSBBT.", detail:"Verify upload completed successfully." },
+      { id:"m2_6", text:"At Prem, confirm good light at assigned CFST port.", detail:"Proceed only when light is verified." }
+    ],
+      ref:{
+        tags:["SCOPE","CLEAN","TRUE TEST"],
+        title:"Scoping / Cleaning / True Test quick reference (Install)",
+        bullets:[
+          "True Test #1 after PFP scoping: Launch Cable → PFP Jumper → PFP Bulkhead",
+          "Clean connector faces before scope + before True Test (Launch Cable, PFP Jumper, Bulkhead)",
+          "Confirm scope images + True Test upload in LSBBT before leaving PFP area"
+        ],
+        note:"Goal: no missed scoping points. Clean first, test second, upload/verify, then move on."
+      }},
+    { id:"m3", marker:3, title:"Survey Customer & Premises", kicker:"Marker 3", items:[
+      { id:"m3_1", text:"Bring RG inside prem.", detail:"Discuss and confirm best RG location with the customer." },
+      { id:"m3_2", text:"Perform Wi‑Fi assessment in Atlas.", detail:"Tests → “+” → select BAN → Wi‑Fi assessment. Connect phone with RG, add rooms, set RG location, perform assessment, upload results." },
+      { id:"m3_3", text:"Discuss Wi‑Fi extenders if needed.", detail:"Confirm preferred installation approach." }
+    ]},
+    { id:"m4", marker:4, title:"Extend to Home", kicker:"Marker 4", items:[
+      { id:"m4_1", text:"At Slack turn Optimeter ON.", detail:"Connect to phone via Wi‑Fi." },
+      { id:"m4_2", text:"Select direction ONT → Splitter and select NID location.", detail:"Confirm correct location selection." },
+      { id:"m4_3", text:"Scope shutter jumper, drop and fiber IW.", detail:"Document results." },
+      { id:"m4_4", text:"Perform True Test at end of your drop.", detail:"Save results." },
+      { id:"m4_5", text:"Upload and verify scopes + True Test in LSBBT.", detail:"Confirm visibility and accuracy." }
+    ],
+      ref:{
+        tags:["SCOPE","CLEAN","TRUE TEST"],
+        title:"Scoping / Cleaning / True Test quick reference (Outside)",
+        bullets:[
+          "True Test #2 after Outside scoping: Launch Cable → End of Drop → End of Home Run",
+          "Clean connector faces at End of Drop and End of Home Run before scope + before True Test",
+          "Verify scope + True Test uploaded in LSBBT before leaving outside work area"
+        ],
+        note:"If you change jumpers or re-mate a connection, clean again."
+      }},
+    { id:"m5", marker:5, title:"Connect to Gateway", kicker:"Marker 5", items:[
+      { id:"m5_1", text:"Run fiber IW to RG location and install fiber jack.", detail:"Confirm clean termination and labeling." },
+      { id:"m5_2", text:"At fiber jack location turn Optimeter ON.", detail:"Reconnect to app via Wi‑Fi." },
+      { id:"m5_3", text:"Select location Fiber Jack and scope launch cable, IW, SFP and both ends of shutter jumper.", detail:"Document and verify." },
+      { id:"m5_4", text:"Perform True Test from shutter jumper.", detail:"Verify scopes and True Test in LSBBT." },
+      { id:"m5_5", text:"Activate RG and verify customer is registered.", detail:"Confirm service is up." }
+    ],
+      ref:{
+        tags:["SCOPE","CLEAN","TRUE TEST"],
+        title:"Scoping / Cleaning / True Test quick reference (Inside)",
+        bullets:[
+          "True Test #3 after Inside scoping: Launch Cable → End of Home Run → Both Ends of Jumper → SFP",
+          "Clean every connector face before scope and before True Test (Home Run, Jumper both ends, SFP)",
+          "Confirm scope + True Test uploaded and validated in LSBBT before closing the job"
+        ],
+        note:"This is the most common miss—don’t leave without verifying uploads."
+      }},
+    { id:"m6", marker:6, title:"Finalize Experience", kicker:"Marker 6", items:[
+      { id:"m6_1", text:"Add extenders if requested and go over the SHM app.", detail:"Wi‑Fi extender workflow is currently WIP (coming soon)." },
+      { id:"m6_2", text:"Demonstrate Active Armor.", detail:"Navigate to My WiFi, WiFi customization, Speed Test, enable Push Notifications and Virtual Assistant." }
+    ]},
+    { id:"m7", marker:7, title:"Verify, Thank & Close", kicker:"Marker 7", items:[
+      { id:"m7_1", text:"Answer any customer questions and go over installation.", detail:"Confirm customer understands basics." },
+      { id:"m7_2", text:"Thank customer for choosing AT&T.", detail:"Provide Make it Matter gift (if applicable)." },
+      { id:"m7_3", text:"Finalize testing and close job at Prem.", detail:"Confirm everything documented." }
+    ]},
+    { id:"scope_ref", marker:null, title:"Install Scoping & True Test (Reference)", kicker:"Reference", items:[
+      { id:"sref_1", text:"Scope checkpoints (typical): PFP jumper → PFP bulkhead → Launch cable → End of Drop → End of Home Run → SFP / both ends jumper.", detail:"Use Atlas scope workflow and verify uploads." },
+      { id:"sref_2", text:"True Test checkpoints (typical): PFP / assigned APN, End of Drop (outside), Inside Home after SFP/jumper.", detail:"Follow local guidance if counts differ by market/job type." }
+    ]}
+  ];
+
+  const REPAIR = [
+    // SAFETY FIRST (non-marker)
+    { id:"r0", marker:null, title:"Safety First", kicker:"Before beginning work", items:[
+      { id:"r0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
+      { id:"r0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe." }
+    ]},
+
+    { id:"r1", marker:1, title:"Dispatch, Preview & Contact", kicker:"Marker 1", items:[
+      { id:"r1_dispatch", text:"Review dispatch details in Atlas.", detail:"Confirm trouble reported and appointment details." },
+      { id:"r1_agent", text:"Pre-assessment: review agent comments / trouble reported.", detail:"Capture key symptoms and expectations." },
+      { id:"r1_hist", text:"Pre-assessment: review customer history.", detail:"Look for repeats / trends / prior repairs." },
+      { id:"r1_equip", text:"Pre-assessment: review equipment info.", detail:"Gateway/ONT model, provisioning notes if present." },
+      { id:"r1_qc", text:"Pre-assessment: review Quality Check results.", detail:"Identify potential quality defects to verify on-site." },
+      { id:"r1_rr", text:"Check RR codes 134/135/136 (Internet Backup).", detail:"If present, address during on-site walkthrough." },
+      { id:"r1_precall", text:"Complete pre-call: intro, empathy, verify access, share ETA.", detail:"If no answer: leave voicemail + send text (Pro Behavior)." },
+      { id:"r1_eta", text:"Update ETA/ETC as needed.", detail:"Keep the customer informed if timing changes." },
+      { id:"r1_drive", text:"Drive directly to premises.", detail:"Hold deeper analysis until you meet the customer (Pro Behavior)." }
+    ]},
+
+    { id:"r2", marker:2, title:"Greet & Understand", kicker:"Marker 2", items:[
+      { id:"r2_onprem", text:"Mark On-Prem in Atlas.", detail:"Then proceed directly to the door with appropriate tools." },
+      { id:"r2_prof", text:"Professional entry: remove sunglasses, step back, greet by name, show ID.", detail:"First impression matters." },
+      { id:"r2_boot", text:"Wear boot covers inside the home.", detail:"Maintain a clean, respectful presence." },
+      { id:"r2_listen", text:"Let the customer explain the concern; actively listen.", detail:"Ask probing questions to confirm understanding." },
+      { id:"r2_own", text:"Own the experience—do not place blame on customer or AT&T teams.", detail:"Build confidence you’ll resolve the issue." },
+      { id:"r2_gateway", text:"Ask customer to show gateway location.", detail:"Pro Behavior: confirm setup and symptoms at the source." },
+      { id:"r2_backup", text:"Discuss Internet Backup if eligible / if RR codes present.", detail:"Address expectations and customer questions early." },
+      { id:"r2_bill", text:"Discuss and obtain approval for any billable items before work.", detail:"Pro Behavior: avoid surprises." },
+      { id:"r2_defects", text:"Note observed quality defects (inside/outside up to CFST).", detail:"Examples: missing Slack NID, drop used as IW, external ONT/older RG, missing fiber jack, etc." },
+      { id:"r2_path", text:"Determine service condition and forward path.", detail:"OOS: start Network; In-service: still test Network first unless customer clearly identified outside trouble." }
+    ]},
+
+    { id:"r3a", marker:3, title:"Isolate & Resolve — Network (Start here)", kicker:"Marker 3A", items:[
+      { id:"r3a_true", text:"Run TRUE test toward PFP.", detail:"Unless customer identified outside trouble, start at the back of the gateway and test the network first." },
+      { id:"r3a_cut", text:"If cut/damaged drop: start at CFST (clean only).", detail:"For BSW: use Sidekick to verify length & scan drop tag (Pro Behavior)." },
+      { id:"r3a_scope", text:"All others: start at RG/ONT and scope/clean as required.", detail:"Scope/clean launch cable & test equipment; repeat until passing (Pro Behavior)." },
+      { id:"r3a_nhood", text:"If Out of Service: run Neighborhood Check by PON/FST.", detail:"Pro Behavior." },
+      { id:"r3a_inform", text:"Inform customer if you need to temporarily leave premises.", detail:"Keep communication simple and clear." },
+      { id:"r3a_repair", text:"Repair identified faults.", detail:"Use VFL at gateway if needed; review Fiber Slack NID label if applicable (Pro Behavior)." },
+      { id:"r3a_repeat", text:"Repeat test/repair until passing TRUE (or submit helper if unable).", detail:"Start helper process as early as possible if required." },
+      { id:"r3a_confirm", text:"Confirm passing QC and passing TRUE results.", detail:"Validate before moving forward." },
+      { id:"r3a_quality", text:"Address observed quality defects / futureproof.", detail:"Missing Slack NID, replace drop-fed IW with Fiber IW, replace external ONT/older RG with 320, install missing fiber jack, etc." },
+      { id:"r3a_upload_true", text:"Upload passing TRUE test and scope results (from RG/ONT).", detail:"Required upload." },
+      { id:"r3a_upload_fj", text:"Upload passing Fiber Jack photo.", detail:"Required upload. Provide periodic ETC updates." },
+      { id:"r3a_cleanup", text:"Clean up work area; remove trash and debris.", detail:"Own it—leave the premises better than you found it." }
+    ]},
+
+    { id:"r3b", marker:3, title:"Isolate & Resolve — Home", kicker:"Marker 3B", items:[
+      { id:"r3b_verify", text:"Verify gateway and home-side stability after network is confirmed.", detail:"Confirm the issue is resolved from the customer’s perspective." },
+      { id:"r3b_wifi", text:"Validate Wi‑Fi standards where applicable.", detail:"Avoid unnecessary changes; do not split bands unless policy requires—use band steering." },
+      { id:"r3b_devices", text:"Verify connected devices are functioning and customer can reconnect as needed.", detail:"Prevent repeat calls and confusion." },
+      { id:"r3b_future", text:"Perform home-side futureproofing where applicable and explain benefits.", detail:"Supports CSI success and reduces repeat dispatches." }
+    ]},
+
+    { id:"r4", marker:4, title:"Certify Products & Services", kicker:"Marker 4", items:[
+      { id:"r4_explain", text:"Explain the resolution in plain language (no jargon).", detail:"Deliver with expertise—simple and confident." },
+      { id:"r4_wifi_submit", text:"Perform and SUBMIT Wi‑Fi Assessment (when applicable).", detail:"Address recommended resolutions (Pro Behavior)." },
+      { id:"r4_band", text:"Do not split 2.4/5GHz; allow band steering.", detail:"Pro Behavior." },
+      { id:"r4_converged", text:"Provide a converged experience when applicable.", detail:"Educate Wi‑Fi Calling; discuss multi‑gig advantages; extenders/ISA inclusions where applicable." },
+      { id:"r4_shm_walk", text:"Walk customer through Smart Home Manager basics.", detail:"SSID Assist, Virtual Assistant, notifications, and where to find help." },
+      { id:"r4_rgst", text:"Have customer run RG Speed Test and review results.", detail:"Discuss device capability vs subscription speeds." },
+      { id:"r4_notify", text:"Confirm push notifications are enabled.", detail:"Helps customers receive service updates and Active Armor alerts." },
+      { id:"r4_backup", text:"Explain Internet Backup if eligible.", detail:"Set expectations for outages and recovery." },
+      { id:"r4_armor", text:"Confirm ActiveArmor status; offer upgrade option if appropriate.", detail:"Customer safety and peace of mind." },
+      { id:"r4_devices", text:"Verify customer devices are working; confirm they know how to connect new devices.", detail:"Exceed expectations." }
+    ]},
+
+    { id:"r5", marker:5, title:"Verify, Thank & Close", kicker:"Marker 5", items:[
+      { id:"r5_summary", text:"Summarize work performed and confirm resolution.", detail:"Discuss any outstanding BDRs and resolve remaining concerns." },
+      { id:"r5_devices", text:"Review connected devices with customer; address remaining questions.", detail:"Confirm everything is working as expected." },
+      { id:"r5_guarantee", text:"Explain the AT&T Guarantee.", detail:"Reinforce confidence and support." },
+      { id:"r5_thank", text:"Confirm satisfaction and thank the customer.", detail:"Suggest wireless referrals when appropriate (Pro Behavior); look for personal connection / Make It Matter." },
+      { id:"r5_text", text:"Send validation text prior to leaving.", detail:"Pro Behavior: verify services working and no new questions arose." },
+      { id:"r5_hanger", text:"Place Fiber Door Hanger (where applicable).", detail:"Pro Behavior." },
+      { id:"r5_keys", text:"Verify Atlas Keys before leaving premises.", detail:"Final QC, passing TRUE, passing RG speed test, close job at premises." },
+      { id:"r5_close", text:"Close job from premises with accurate codes and narrative.", detail:"Ensure documentation supports the work performed." }
+    ]}
+  ];
+
+
+  /* ---------- State ---------- */
+  const LS_KEY = "afo_expert_path_state_v1";
+  const defaultState = { mode:"install", open:{}, checks:{} };
+
+  // Marker display labels (used for badge captions)
+const INSTALL_MARKER_LABELS = {
+  1: "GREET AND VERIFY",
+  2: "QUALIFY TO TERMINAL",
+  3: "SURVEY CUSTOMER AND PREMISES",
+  4: "EXTEND TO HOME",
+  5: "CONNECT TO GATEWAY",
+  6: "FINALIZE EXPERIENCE",
+  7: "VERIFY, THANK, AND CLOSE",
+};
+const REPAIR_MARKER_LABELS = {
+  1: "DISPATCH, PREVIEW & CONTACT",
+  2: "GREET & UNDERSTAND",
+  3: "ISOLATE & RESOLVE",
+  4: "CERTIFY PRODUCTS & SERVICES",
+  5: "VERIFY, THANK & CLOSE",
+};
+
+  function miniBadgeSVG(mode, marker){
+  const num = String(marker);
+  const isInstall = mode === "install";
+  const fill = isInstall ? "#1aa7d8" : "#8cc63e";
+  const stroke = isInstall ? "rgba(26,167,216,.55)" : "rgba(140,198,62,.55)";
+  const ribbonText = isInstall ? "FIBER INSTALL" : "FIBER REPAIR";
+  // Topo-like pattern (light lines) inside the fill
   return `
-  <svg viewBox="0 0 72 76">
-    <path d="M36 4 C52 4 64 16 64 34 C64 53 51 70 36 72 C21 70 8 53 8 34 C8 16 20 4 36 4 Z"
-    fill="${color}" />
-    <text x="36" y="42" text-anchor="middle" font-size="30" fill="#fff" font-weight="900">${num}</text>
-  </svg>`;
+    <svg class="miniBadge" viewBox="0 0 72 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="topo_${mode}_${marker}" width="18" height="18" patternUnits="userSpaceOnUse">
+          <path d="M0 6 C4 2, 8 2, 18 6" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+          <path d="M0 12 C6 8, 12 8, 18 12" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.1"/>
+          <path d="M3 0 C6 4, 6 8, 3 18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.0"/>
+        </pattern>
+      </defs>
+
+      <!-- Outer teardrop -->
+      <path d="M36 4
+               C52 4 64 16 64 34
+               C64 53 51 70 36 72
+               C21 70 8 53 8 34
+               C8 16 20 4 36 4 Z"
+            fill="rgba(255,255,255,.82)"
+            stroke="${stroke}" stroke-width="3"/>
+
+      <!-- Inner fill -->
+      <path d="M36 10
+               C48 10 58 20 58 34
+               C58 49 47 62 36 64
+               C25 62 14 49 14 34
+               C14 20 24 10 36 10 Z"
+            fill="${fill}" />
+
+      <!-- Topo overlay -->
+      <path d="M36 10
+               C48 10 58 20 58 34
+               C58 49 47 62 36 64
+               C25 62 14 49 14 34
+               C14 20 24 10 36 10 Z"
+            fill="url(#topo_${mode}_${marker})" opacity="0.9"/>
+
+      <!-- Number -->
+      <text x="36" y="41" text-anchor="middle" font-size="30" font-weight="900" fill="white"
+            font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${num}</text>
+
+      <!-- Ribbon -->
+      <path d="M16 56 Q36 66 56 56"
+            fill="rgba(255,255,255,.86)" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+      <text x="36" y="62" text-anchor="middle" font-size="9" font-weight="900"
+            fill="rgba(17,24,39,.75)" letter-spacing="1.1"
+            font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${ribbonText}</text>
+    </svg>
+  `;
 }
 
-const DATA=[
-{ id:"install1", mode:"install", marker:1, title:"Greet & Verify", items:["Confirm order","Verify expectations"]},
-{ id:"install2", mode:"install", marker:2, title:"Qualify Terminal", items:["Check signal","Confirm route"]},
-{ id:"repair1", mode:"repair", marker:1, title:"Dispatch & Contact", items:["Review history","Confirm issue"]},
-{ id:"repair2", mode:"repair", marker:2, title:"Isolate & Resolve", items:["Run isolation","Correct issue"]}
+
+
+
+  function renderMarkerRail(mode, sections){
+    const rail = document.getElementById("markerRail");
+    if(!rail) return;
+    rail.innerHTML = "";
+    const markerSecs = sections.filter(s => s.marker !== null && s.marker !== undefined);
+    // Optional PPE / Safety chip if present
+    const safetySec = sections.find(s => /Safety/i.test(s.title || ""));
+    if(safetySec){
+      const b = document.createElement("button");
+      b.className = "markerChip";
+      b.type = "button";
+      b.innerHTML = `<span class="miniText">PPE</span>`;
+      b.addEventListener("click", () => {
+        const el = document.getElementById(`sec-${safetySec.id}`);
+        if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+      rail.appendChild(b);
+    }
+    markerSecs.forEach(sec => {
+      const btn = document.createElement("button");
+      btn.className = "markerChip";
+      btn.type = "button";
+      btn.setAttribute("aria-label", `Go to Marker ${sec.marker}: ${sec.title}`);
+      btn.innerHTML = `${miniBadgeSVG(mode, sec.marker)}<div class="chipText"><div class="chipSub">${(mode==="install"? (INSTALL_MARKER_LABELS[sec.marker]||"") : (REPAIR_MARKER_LABELS[sec.marker]||""))}</div></div>`;
+      btn.addEventListener("click", () => {
+        const el = document.getElementById(`sec-${sec.id}`);
+        if(!el) return;
+        // Open the section (accordion) and persist state so it stays open after refresh
+        el.open = true;
+        state.open[sec.id] = true;
+        saveState();
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+        // Small visual cue
+        el.classList.add("flash");
+        window.setTimeout(() => el.classList.remove("flash"), 800);
+      });
+rail.appendChild(btn);
+    });
+  }
+
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if(!raw) return structuredClone(defaultState);
+      const parsed = JSON.parse(raw);
+      // basic shape repair
+      if(!parsed || typeof parsed !== "object") return structuredClone(defaultState);
+      parsed.mode = (parsed.mode === "repair") ? "repair" : "install";
+      parsed.open = parsed.open && typeof parsed.open === "object" ? parsed.open : {};
+      parsed.checks = parsed.checks && typeof parsed.checks === "object" ? parsed.checks : {};
+      return parsed;
+    }catch{
+      return structuredClone(defaultState);
+    }
+  }
+  function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+
+  let state = loadState();
+
+  
+/* ---------- Reference Links (kept separate so checklist stays simple) ---------- */
+const REPAIR_REFS = [
+  { title:"M&P: Expert Path Install", desc:"Install process source of record (for cross-reference).", url:"https://youknow.att.com/afo/mp-expert-path-fiber-install/" },
+  { title:"FTTP Install & Repair Standard Practice", desc:"Standard practice for GPON install/repair.", url:"https://youknow.att.com/afo/fttpsfu-fttp-gpon-installation-repair-mp/" },
+  { title:"M&P: Fiber Scoping & Cleaning", desc:"Proper scoping/cleaning procedure.", url:"https://youknow.att.com/afo/mp-fiber-scoping-and-cleaning/" },
+  { title:"LSBBT RR Library", desc:"RR library job aid.", url:"https://youknow.att.com/afo/lsbbt-rr-library/" },
+  { title:"Fiber Troubleshooting SRN/AOTS Referrals", desc:"Referral guidance for SRN/AOTS.", url:"https://youknow.att.com/afo/fttp-fiber-troubleshooting/" },
+  { title:"AOTS Escalation Process", desc:"Escalation process when needed.", url:"https://youknow.att.com/afo/iefs-network-and-system-outage-aots-escalation-process/" },
+  { title:"Wi‑Fi FAQ Job Aid", desc:"Customer education + common Wi‑Fi questions.", url:"https://youknow.att.com/afo/wi-fi-faq/" },
+  { title:"M&P: Atlas Wi‑Fi Assessment", desc:"Wi‑Fi Assessment process.", url:"https://youknow.att.com/afo/mp-atlas-wi-fi-assessment/" },
+  { title:"M&P: Internet Backup", desc:"RR 134/135/136 guidance.", url:"https://youknow.att.com/afo/mp-internet-backup/" },
+  { title:"AT&T Guarantee Overview", desc:"Closeout + customer confidence.", url:"https://youknow.att.com/afo/att-guarantee-overview/" },
+  { title:"Service Escalation Program Process", desc:"When issues remain unresolved.", url:"https://youknow.att.com/afo/service-escalation-program-process/" },
+  { title:"Fiber Door Tag Process Job Aid", desc:"Door tag / hanger process.", url:"https://youknow.att.com/afo/fiber_door_tag/" }
 ];
 
-function updateProgress(){
-  let total=0,done=0;
-  DATA.forEach(sec=>{
-    sec.items.forEach((_,i)=>{
-      total++;
-      if(state[sec.id+"_item_"+i])done++;
-    });
-  });
-  const pct= total? Math.round(done/total*100):0;
-  document.getElementById("barFill").style.width=pct+"%";
-  document.getElementById("progressPercent").textContent=pct+"%";
+const INSTALL_REFS = [
+  { title:"M&P: Expert Path Install", desc:"Install process source of record.", url:"https://youknow.att.com/afo/mp-expert-path-fiber-install/" },
+  { title:"FTTP Install & Repair Standard Practice", desc:"Standard practice for GPON install/repair.", url:"https://youknow.att.com/afo/fttpsfu-fttp-gpon-installation-repair-mp/" },
+  { title:"M&P: Fiber Scoping & Cleaning", desc:"Proper scoping/cleaning procedure.", url:"https://youknow.att.com/afo/mp-fiber-scoping-and-cleaning/" }
+];
+
+function renderRefs(){
+  const body = $("refsBody");
+  if(!body) return;
+  const list = (state.mode === "repair") ? REPAIR_REFS : INSTALL_REFS;
+  if(!Array.isArray(list) || list.length === 0){
+    body.innerHTML = `<div style="color:var(--muted);font-size:13px">No reference links configured.</div></div>`;
+    return;
+  }
+  body.innerHTML = `
+    <div class="refsGrid">
+      ${list.map(r => {
+        const t = escapeHTML(r.title || "Link");
+        const d = escapeHTML(r.desc || "");
+        const u = escapeHTML(r.url || "#");
+        return `<a class="refItem" href="${u}" target="_blank" rel="noopener noreferrer">
+                  <div class="refTitle">${t}</div>
+                  <div class="refDesc">${d}</div>
+                </a>`;
+      }).join("")}
+    </div>
+  `;
 }
+/* ---------- Helpers ---------- */
+  const $ = (id) => document.getElementById(id);
 
-function render(){
-  const rail=document.getElementById("markerRail");
-  const container=document.getElementById("sections");
-  rail.innerHTML="";
-  container.innerHTML="";
+  function currentData(){ return state.mode === "repair" ? REPAIR : INSTALL; }
 
-  DATA.forEach(sec=>{
-    const chip=document.createElement("div");
-    chip.className="markerChip";
-    chip.innerHTML=badgeSVG(sec.mode,sec.marker)+"<span>"+sec.title.toUpperCase()+"</span>";
-    chip.onclick=()=>document.getElementById(sec.id).scrollIntoView({behavior:"smooth"});
-    rail.appendChild(chip);
+  function allItemIds(data){
+    const ids = [];
+    data.forEach(sec => (sec.items||[]).forEach(it => ids.push(it.id)));
+    return ids;
+  }
 
-    const detail=document.createElement("details");
-    detail.className="section";
-    detail.id=sec.id;
-    detail.open=state[sec.id+"_open"]||false;
+  function calcStats(){
+    const data = currentData();
+    renderMarkerRail(state.mode, data);
+    const secTotal = data.length;
+    let secDone = 0;
+    let itemTotal = 0;
+    let itemDone = 0;
 
-    const sum=document.createElement("summary");
-    sum.innerHTML='<div class="badge">'+badgeSVG(sec.mode,sec.marker)+'</div>'+sec.title+'<div class="status">NOT DONE</div>';
-
-    sum.onclick=()=>{
-      setTimeout(()=>{
-        state[sec.id+"_open"]=detail.open;
-        save();
-      },0);
-    };
-
-    detail.appendChild(sum);
-
-    sec.items.forEach((text,i)=>{
-      const key=sec.id+"_item_"+i;
-      const div=document.createElement("div");
-      div.className="item";
-      div.innerHTML='<input type="checkbox" id="'+key+'"><label>'+text+'</label>';
-      const cb=div.querySelector("input");
-      cb.checked=state[key]||false;
-
-      cb.onclick=(e)=>{
-        e.stopPropagation();
-        state[key]=cb.checked;
-        state[sec.id+"_open"]=true;
-        save();
-        detail.open=true;
-        updateProgress();
-      };
-
-      detail.appendChild(div);
+    data.forEach(sec => {
+      const items = sec.items || [];
+      if(items.length === 0){ return; }
+      itemTotal += items.length;
+      let thisDone = 0;
+      items.forEach(it => {
+        if(state.checks[it.id]){ thisDone += 1; itemDone += 1; }
+      });
+      if(thisDone === items.length) secDone += 1;
     });
 
-    container.appendChild(detail);
+    $("secDone").textContent = String(secDone);
+    $("secTotal").textContent = String(secTotal);
+    $("itemDone").textContent = String(itemDone);
+    $("itemTotal").textContent = String(itemTotal);
+
+    // Progress bar
+    const pct = itemTotal ? Math.round((itemDone / itemTotal) * 100) : 0;
+    const bar = $("barFill");
+    if(bar) bar.style.width = pct + "%";
+    const pctEl = $("pctText");
+    if(pctEl) pctEl.textContent = pct + "%";
+  }
+
+  function updateModeUI(){
+    const isRepair = state.mode === "repair";
+
+    // Update title + subtitle
+    const titleEl = document.getElementById("appTitle");
+    const subEl = document.getElementById("appSubtitle");
+    if(titleEl){
+      if(isRepair){
+        titleEl.classList.remove("title--install");
+        titleEl.classList.add("title--repair");
+        titleEl.textContent = "EXPERT PATH REPAIR";
+      } else {
+        titleEl.classList.remove("title--repair");
+        titleEl.classList.add("title--install");
+        titleEl.innerHTML = '<span class="att">AT&amp;T</span> <span class="fiber">fiber</span> <span class="ep">Expert Path</span>';
+      }
+    }
+    if(subEl){
+      subEl.innerHTML = isRepair
+        ? 'Fiber Repair workflow — 5 markers · PPE required per job function.'
+        : 'Fiber Install workflow — 7 markers · PPE required per job function.';
+    }
+    $("btnInstall").setAttribute("aria-pressed", String(!isRepair));
+    $("btnRepair").setAttribute("aria-pressed", String(isRepair));
+    $("modeText").textContent = `Mode: ${isRepair ? "Repair" : "Install"}`;
+    $("modePill").classList.toggle("repair", isRepair);
+
+    // update checkbox accent by toggling class on root list
+    const sections = $("sections");
+    sections.classList.toggle("repairMode", isRepair);
+  }
+
+  function render(){
+    updateModeUI();
+
+    const data = currentData();
+    const host = $("sections");
+    host.innerHTML = "";
+
+    data.forEach(sec => {
+      const did = sec.id;
+      const open = !!state.open[did];
+      const title = sec.title || "";
+      const kicker = sec.kicker || "";
+      const marker = sec.marker;
+      const items = Array.isArray(sec.items) ? sec.items : [];
+
+      const doneCount = items.filter(it => !!state.checks[it.id]).length;
+      const isDone = items.length > 0 && doneCount === items.length;
+
+      const badge = (marker !== null && marker !== undefined)
+        ? `<div class="badgeWrap">${badgeSVG(marker, state.mode)}</div>`
+        : `<div class="badgeWrap"></div></div>`;
+      const detailEls = items.map(it => {
+        const checked = !!state.checks[it.id];
+        const safeText = escapeHTML(it.text || "");
+        const safeDetail = escapeHTML(it.detail || "");
+        return `
+          <label class="item">
+            <input type="checkbox" data-item="${it.id}" ${checked ? "checked" : ""} />
+            <div class="itemText">
+              <div class="itemTitle">${safeText}</div>
+              ${safeDetail ? `<div class="itemDetail">${safeDetail}</div>` : ""}
+            </div>
+          </label>
+        `;
+      }).join("");
+
+      const el = document.createElement("details");
+        el.id = `sec-${sec.id}`;
+      el.open = open;
+      el.dataset.section = did;
+
+      el.innerHTML = `
+        <summary>
+          <div class="chev" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 10l5 5 5-5" stroke="rgba(233,238,244,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          ${badge}
+          <div class="sumText">
+            ${kicker ? `<div class="kicker">${escapeHTML(kicker)}</div>` : `<div class="kicker">${marker ? "Marker "+marker : ""}</div>`}
+            <div class="name">${escapeHTML(title)}</div>
+          </div>
+          <div class="statusPill ${isDone ? "done" : ""}">
+            <span class="statusDot ${isDone ? "done" : ""}"></span>
+            <span>${isDone ? "DONE" : "NOT DONE"}</span>
+          </div>
+        </summary>
+        <div class="body">
+          <p class="hint">Check off items as you complete them.</p>
+          ${renderRef(sec.ref)}
+          <div class="items">${detailEls}</div>
+        </div>
+      `;
+
+      host.appendChild(el);
+    });
+
+    // wire events
+    host.querySelectorAll("details").forEach(d => {
+      d.addEventListener("toggle", () => {
+        state.open[d.dataset.section] = d.open;
+        saveState();
+        calcStats();
+      }, { passive:true });
+    });
+
+    host.querySelectorAll('input[type="checkbox"][data-item]').forEach(cb => {
+      cb.addEventListener("change", () => {
+        const id = cb.getAttribute("data-item");
+        state.checks[id] = cb.checked;
+        saveState();
+        // update status pill for that section without full re-render
+        const det = cb.closest("details");
+        if(det){
+          // Keep the section open while you check items (prevents frustrating auto-collapse)
+          if(!det.open){ det.open = true; }
+
+          const secId = det.dataset.section;
+          if(secId){ state.open[secId] = true; saveState(); }
+
+          const dataNow = currentData().find(s => s.id === secId);
+          if(dataNow){
+            const itemsNow = dataNow.items || [];
+            const done = itemsNow.filter(it => !!state.checks[it.id]).length;
+            const isDone2 = itemsNow.length > 0 && done === itemsNow.length;
+            const pillText = det.querySelector(".statusPill span:last-child");
+            const pillWrap = det.querySelector(".statusPill");
+            const dot = det.querySelector(".statusDot");
+            if(pillText) pillText.textContent = isDone2 ? "DONE" : "NOT DONE";
+            if(pillWrap) pillWrap.classList.toggle("done", isDone2);
+            if(dot) dot.classList.toggle("done", isDone2);
+          }
+        }
+        calcStats();
+      }, { passive:true });
+    });
+
+    renderRefs();
+    calcStats();
+  }
+
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+  }
+
+  
+  function renderRef(ref){
+    if(!ref) return "";
+    const title = escapeHTML(ref.title || "Scoping / Cleaning / True Test");
+    const bullets = Array.isArray(ref.bullets) ? ref.bullets : [];
+    const tags = Array.isArray(ref.tags) ? ref.tags : [];
+    const note = ref.note ? escapeHTML(ref.note) : "";
+    const tagsHTML = tags.length
+      ? `<div style="margin-bottom:8px;">${tags.map(t=>`<span class="refTag">${escapeHTML(t)}</span>`).join("")}</div>`
+      : "";
+    const listHTML = bullets.length
+      ? `<ul>${bullets.map(b=>`<li>${escapeHTML(b)}</li>`).join("")}</ul>`
+      : "";
+    const noteHTML = note ? `<div class="refNote">${note}</div>` : "";
+    return `<div class="refBox">${tagsHTML}<h4>${title}</h4>${listHTML}${noteHTML}</div></div>`;
+  }
+
+/* ---------- Actions ---------- */
+  $("btnInstall").addEventListener("click", () => {
+    if(state.mode === "install") return;
+    state.mode = "install";
+    saveState();
+    render();
+  });
+  $("btnRepair").addEventListener("click", () => {
+    if(state.mode === "repair") return;
+    state.mode = "repair";
+    saveState();
+    render();
   });
 
-  updateProgress();
-}
+  $("expandAll").addEventListener("click", () => {
+    currentData().forEach(sec => state.open[sec.id] = true);
+    saveState(); render();
+  });
+  $("collapseAll").addEventListener("click", () => {
+    currentData().forEach(sec => state.open[sec.id] = false);
+    saveState(); render();
+  });
 
-render();
+  $("reset").addEventListener("click", () => {
+    // wipe checkmarks only for current mode items to avoid surprising the other mode
+    const data = currentData();
+    allItemIds(data).forEach(id => delete state.checks[id]);
+    saveState(); render();
+  });
+
+  $("completeClear").addEventListener("click", () => {
+    const data = currentData();
+    allItemIds(data).forEach(id => state.checks[id] = true);
+    // then clear after 300ms so user sees it complete
+    saveState(); render();
+    setTimeout(() => {
+      allItemIds(data).forEach(id => delete state.checks[id]);
+      saveState(); render();
+    }, 300);
+  });
+
+  /* ---------- Initial render ---------- */
+  render();
+
+})();
 </script>
-
 </body>
 </html>
