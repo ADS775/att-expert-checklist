@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AT&T Fiber • Expert Path</title>
+<title>AT&T Fiber Expert Path</title>
 
 <style>
 :root{
@@ -15,7 +15,6 @@
   --warn:#f59e0b;
   --text:#e6eef7;
 }
-
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -23,36 +22,39 @@ body{
   background:linear-gradient(180deg,#08151f,#0f2c3c);
   color:var(--text);
 }
-
 .wrap{max-width:950px;margin:auto;padding:18px}
-.section{
-  background:var(--card);
-  border:1px solid var(--stroke);
-  border-radius:20px;
-  margin-top:14px;
+h1{margin-top:0}
+
+.safety{
+  border-left:6px solid var(--warn);
+  background:rgba(245,158,11,.15);
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:18px;
+  font-weight:700;
+}
+
+.progressWrap{margin:12px 0}
+.bar{
+  height:14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
   overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
 }
-.section summary{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:16px;
-  cursor:pointer;
-  font-weight:900;
+.barFill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--blue),var(--green));
+  transition:width .25s ease;
 }
-.status{
-  margin-left:auto;
+.progressText{
+  margin-top:6px;
   font-size:12px;
-  padding:6px 12px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.15);
-}
-.status.done{
-  background:rgba(34,197,94,.2);
-}
-.badge svg{
-  width:54px;
-  height:54px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
 }
 
 .markerRail{
@@ -66,7 +68,7 @@ body{
 }
 .markerChip{
   display:flex;
-  gap:12px;
+  gap:10px;
   align-items:center;
   background:#fff;
   border-radius:40px;
@@ -80,14 +82,32 @@ body{
   font-weight:800;
   font-size:12px;
 }
-.safety{
-  border-left:6px solid var(--warn);
-  background:rgba(245,158,11,.15);
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:18px;
-  font-weight:800;
+
+.section{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:20px;
+  margin-top:14px;
+  overflow:hidden;
 }
+.section summary{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px;
+  cursor:pointer;
+  font-weight:900;
+}
+.section .badge svg{width:54px;height:54px}
+.status{
+  margin-left:auto;
+  font-size:12px;
+  padding:6px 12px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.2);
+}
+.status.done{background:rgba(34,197,94,.2)}
+
 .item{
   padding:12px 16px;
   border-top:1px solid var(--stroke);
@@ -107,49 +127,59 @@ body{
 Safety Reminder – PPE & FVD required before beginning work.
 </div>
 
-<div class="markerRail" id="markerRail"></div>
+<div class="progressWrap">
+  <div class="bar">
+    <div class="barFill" id="barFill"></div>
+  </div>
+  <div class="progressText"><span id="progressPercent">0%</span> Complete</div>
+</div>
 
+<div class="markerRail" id="markerRail"></div>
 <div id="sections"></div>
 
 </div>
 
 <script>
-const STORAGE_KEY = "expert_path_state";
+const STORAGE_KEY="expert_path_state";
+let state=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
 
-function saveState(state){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-function loadState(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-  catch{ return {}; }
-}
-
-let state = loadState();
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
 
 function badgeSVG(mode,num){
-  const color = mode==="install" ? "#1aa7d8" : "#8cc63e";
-  const text = mode==="install" ? "FIBER INSTALL" : "FIBER REPAIR";
+  const color=mode==="install"?"#1aa7d8":"#8cc63e";
   return `
   <svg viewBox="0 0 72 76">
     <path d="M36 4 C52 4 64 16 64 34 C64 53 51 70 36 72 C21 70 8 53 8 34 C8 16 20 4 36 4 Z"
-      fill="${color}"/>
+    fill="${color}" />
     <text x="36" y="42" text-anchor="middle" font-size="30" fill="#fff" font-weight="900">${num}</text>
-    <text x="36" y="62" text-anchor="middle" font-size="9" fill="#fff">${text}</text>
   </svg>`;
 }
 
-const DATA = [
-  {id:"m1", mode:"install", marker:1, title:"Greet & Verify", items:["Confirm order","Verify expectations"]},
-  {id:"m2", mode:"install", marker:2, title:"Qualify to Terminal", items:["Check signal","Confirm route"]},
-  {id:"r1", mode:"repair", marker:1, title:"Dispatch & Contact", items:["Review history","Confirm issue"]},
-  {id:"r2", mode:"repair", marker:2, title:"Isolate & Resolve", items:["Run isolation","Correct issue"]}
+const DATA=[
+{ id:"install1", mode:"install", marker:1, title:"Greet & Verify", items:["Confirm order","Verify expectations"]},
+{ id:"install2", mode:"install", marker:2, title:"Qualify Terminal", items:["Check signal","Confirm route"]},
+{ id:"repair1", mode:"repair", marker:1, title:"Dispatch & Contact", items:["Review history","Confirm issue"]},
+{ id:"repair2", mode:"repair", marker:2, title:"Isolate & Resolve", items:["Run isolation","Correct issue"]}
 ];
 
+function updateProgress(){
+  let total=0,done=0;
+  DATA.forEach(sec=>{
+    sec.items.forEach((_,i)=>{
+      total++;
+      if(state[sec.id+"_item_"+i])done++;
+    });
+  });
+  const pct= total? Math.round(done/total*100):0;
+  document.getElementById("barFill").style.width=pct+"%";
+  document.getElementById("progressPercent").textContent=pct+"%";
+}
+
 function render(){
-  const rail = document.getElementById("markerRail");
-  const sections = document.getElementById("sections");
+  const rail=document.getElementById("markerRail");
+  const container=document.getElementById("sections");
   rail.innerHTML="";
-  sections.innerHTML="";
+  container.innerHTML="";
 
   DATA.forEach(sec=>{
     const chip=document.createElement("div");
@@ -166,50 +196,43 @@ function render(){
     const sum=document.createElement("summary");
     sum.innerHTML='<div class="badge">'+badgeSVG(sec.mode,sec.marker)+'</div>'+sec.title+'<div class="status">NOT DONE</div>';
 
-    sum.onclick=(e)=>{
+    sum.onclick=()=>{
       setTimeout(()=>{
         state[sec.id+"_open"]=detail.open;
-        saveState(state);
+        save();
       },0);
     };
 
     detail.appendChild(sum);
 
     sec.items.forEach((text,i)=>{
-      const id=sec.id+"_item_"+i;
+      const key=sec.id+"_item_"+i;
       const div=document.createElement("div");
       div.className="item";
-      div.innerHTML='<input type="checkbox" id="'+id+'"><label for="'+id+'">'+text+'</label>';
+      div.innerHTML='<input type="checkbox" id="'+key+'"><label>'+text+'</label>';
       const cb=div.querySelector("input");
-      cb.checked=state[id]||false;
+      cb.checked=state[key]||false;
 
       cb.onclick=(e)=>{
         e.stopPropagation();
-        state[id]=cb.checked;
-        saveState(state);
-
-        // force section to stay open
-        detail.open=true;
+        state[key]=cb.checked;
         state[sec.id+"_open"]=true;
-        saveState(state);
-
-        // update status
-        const all=sec.items.every((_,j)=>state[sec.id+"_item_"+j]);
-        const status=sum.querySelector(".status");
-        if(all){
-          status.textContent="DONE";
-          status.classList.add("done");
-        }
+        save();
+        detail.open=true;
+        updateProgress();
       };
 
       detail.appendChild(div);
     });
 
-    sections.appendChild(detail);
+    container.appendChild(detail);
   });
+
+  updateProgress();
 }
 
 render();
 </script>
+
 </body>
 </html>
