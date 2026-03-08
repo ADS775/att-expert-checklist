@@ -150,8 +150,19 @@
     .stat .lbl{color:var(--muted2);font-size:13px}
     .stat .val{font-size:26px;font-weight:900;letter-spacing:.02em}
     .actions{
-      padding:12px 18px 18px;
+      padding:12px 18px 10px;
       display:flex;gap:10px;flex-wrap:wrap;
+    }
+    .actionToggles{
+      padding:0 18px 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      border-bottom:1px solid var(--stroke);
+    }
+    .actionToggles .quickBtn,
+    .actionToggles .actionToggleBtn{
+      width:auto;
     }
     
       .markerRail{
@@ -220,6 +231,7 @@
     .actionTogglePanel[hidden]{display:none !important}
     .actionTogglePanel h3{margin:0 0 10px;font-size:18px}
     .actionTogglePanel .itemDetail{margin-top:5px}
+    .safetyActionPanel{border-color:rgba(255,77,94,.42);box-shadow:0 0 0 2px rgba(255,77,94,.12), 0 12px 28px rgba(0,0,0,.18)}
     .bulletRefs{margin:0;padding-left:18px;display:grid;gap:10px}
     .bulletRefs li{color:var(--text)}
     .bulletRefs strong{display:block;font-size:15px}
@@ -496,6 +508,57 @@
 }
 .resourceCard[hidden]{display:none !important;}
 
+.controlsRight{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.feedbackBtn{
+  border-color:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+}
+.feedbackForm{display:grid;gap:12px}
+.feedbackGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feedbackForm label{display:grid;gap:6px}
+.feedbackForm label span{font-weight:800;color:rgba(233,238,244,.92)}
+.feedbackForm input,
+.feedbackForm select,
+.feedbackForm textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.18);
+  color:var(--text);
+  outline:none;
+  font:inherit;
+}
+.feedbackForm textarea{resize:vertical;min-height:88px}
+.feedbackActions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.blueBtn{border-color:rgba(26,167,225,.38);background:rgba(26,167,225,.10)}
+.feedbackNote{font-size:12px;color:var(--muted)}
+.guideGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.guideCard{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  border-radius:16px;
+  padding:14px;
+}
+.guideCard h4{margin:0 0 8px 0;font-size:16px}
+.guideCard p{margin:0;color:var(--muted);line-height:1.45}
+.guideCard ul,.guideCard ol{margin:8px 0 0 18px;padding:0;color:var(--muted)}
+.guideCard li{margin:6px 0}
+@media (max-width:720px){
+  .feedbackGrid{grid-template-columns:1fr}
+  .guideGrid{grid-template-columns:1fr}
+  .controlsRight{margin-left:0;width:100%;justify-content:flex-start}
+}
 
 
 /* Safety callout */
@@ -738,6 +801,10 @@
     .btnLabel{display:inline-flex;align-items:center;}
     .quickBtnSafety{background:rgba(255,77,94,.12);border-color:rgba(255,77,94,.32);color:#ffe7ea}
     .quickBtnCode{background:rgba(121,193,66,.12);border-color:rgba(121,193,66,.35)}
+    .quickBtnRef{background:rgba(26,167,225,.12);border-color:rgba(26,167,225,.35)}
+    .quickBtnRes{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.18)}
+    .quickBtnWarn{background:rgba(245,176,26,.12);border-color:rgba(245,176,26,.40);color:#fff0cf}
+    .quickBtnInstallRef{background:rgba(121,193,66,.12);border-color:rgba(121,193,66,.75)}
     .quickBtnRef{background:rgba(26,167,225,.10);border-color:rgba(26,167,225,.30)}
     .quickBtnRes{background:rgba(255,255,255,.08)}
     .questBtn{
@@ -814,12 +881,104 @@
     .codeQuickText ul{margin:0 0 0 18px;padding:0}
     .codeQuickText li{margin:6px 0;color:var(--muted)}
     .questPanel{border-color:rgba(140,82,255,.38)}
+    .quickPanel.openSafety{border-color:rgba(255,77,94,.48);box-shadow:0 0 0 2px rgba(255,77,94,.18), 0 16px 38px rgba(0,0,0,.24)}
+    .quickPanel.openCode{border-color:rgba(121,193,66,.48);box-shadow:0 0 0 2px rgba(121,193,66,.16), 0 16px 38px rgba(0,0,0,.24)}
+    .quickPanel.openReference{border-color:rgba(26,167,225,.48);box-shadow:0 0 0 2px rgba(26,167,225,.16), 0 16px 38px rgba(0,0,0,.24)}
+    .quickPanel.openResources{border-color:rgba(255,255,255,.28);box-shadow:0 0 0 2px rgba(255,255,255,.10), 0 16px 38px rgba(0,0,0,.24)}
+    .quickPanel.openQuest{border-color:rgba(140,82,255,.48);box-shadow:0 0 0 2px rgba(140,82,255,.16), 0 16px 38px rgba(0,0,0,.24)}
+    .quickSafetyList{margin:0;padding-left:20px}
+    .quickSafetyList li{margin:0 0 14px 0;color:var(--text)}
+    .quickSafetyList li:last-child{margin-bottom:0}
     .questItems .item input[type="checkbox"]{accent-color:#8c52ff}
 
     .xpReward{display:inline-flex;align-items:center;gap:6px;font-weight:900;color:#f4dd95;white-space:nowrap}
     .xpToken{width:16px;height:16px;display:inline-block;border-radius:50%;background:radial-gradient(circle at 35% 35%, #fff4c5 0 28%, #f1c65a 29%, #c98a1d 72%, #8a5a10 100%);box-shadow:0 0 0 2px rgba(255,221,149,.18), inset 0 0 0 2px rgba(255,247,210,.42), 0 0 10px rgba(224,172,54,.18);position:relative;flex:0 0 auto}
     .xpToken:after{content:"";position:absolute;inset:3px;border-radius:50%;border:1.5px solid rgba(133,84,12,.45)}
     .questItems .itemTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+
+    @media (max-width:720px){
+      .wrap{padding:12px 10px calc(96px + env(safe-area-inset-bottom));}
+      .hero{padding:16px 14px 14px;}
+      .controls,
+      .quickAccess,
+      .stats,
+      .actions,
+      .actionToggles,
+      .markerRailWrap{padding-left:14px;padding-right:14px;}
+      .stats{grid-template-columns:1fr;gap:10px;}
+      .stat{min-height:84px;align-items:center;}
+      .stat .val{font-size:22px;line-height:1;}
+      .markerRail{gap:10px;padding-bottom:8px;}
+      .markerChip{
+        min-width:176px !important;
+        max-width:210px !important;
+        padding:10px 12px !important;
+        gap:10px !important;
+      }
+      .markerChip .miniBadge{
+        width:46px !important;
+        height:46px !important;
+      }
+      .markerChip .chipSub{
+        max-width:118px !important;
+        font-size:10px !important;
+        line-height:1.08 !important;
+        -webkit-line-clamp:3 !important;
+      }
+      .actions{gap:10px;}
+      .actions .btn{
+        flex:1 1 calc(50% - 10px);
+        min-width:140px;
+        justify-content:center;
+      }
+      .actionToggles{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+      }
+      .safetyToggleGroup{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+      }
+      .installRefToggle{
+        margin-left:0 !important;
+      }
+      .quickBtn,.questBtn,.feedbackBtn{
+        width:100% !important;
+      }
+      .controlsRight{
+        width:100%;
+        justify-content:flex-start;
+      }
+      .modePill{
+        width:100%;
+        justify-content:flex-start;
+      }
+      .name{
+        white-space:normal !important;
+        overflow:visible !important;
+        text-overflow:clip !important;
+        line-height:1.12;
+      }
+      .statusPill,.status{
+        font-size:12px;
+        padding:8px 10px;
+      }
+    }
+
+    @media (max-width:420px){
+      .markerChip{
+        min-width:162px !important;
+        max-width:188px !important;
+      }
+      .actions .btn{
+        flex:1 1 100%;
+      }
+      .titleRow{gap:10px;}
+      #appTitle.title{font-size:28px !important;}
+    }
 
 </style>
 </head>
@@ -869,40 +1028,21 @@
           <button id="btnRepair" aria-pressed="false" type="button">Repair</button>
         </div>
         <button class="btn questBtn" id="btnExpertQuest" type="button" aria-pressed="false"><span class="questBadge" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M11 18h21v8H19v12h13v8H11z" fill="#fff" opacity=".98"/><circle cx="41" cy="31" r="11" stroke="#fff" stroke-width="6"/><path d="M49 39l8 8" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M41 5l3.2 8h-6.4L41 5zm0 52l3.2-8h-6.4L41 57zM18 31l8-3.2v6.4L18 31zm46 0l-8 3.2v-6.4L64 31z" fill="#fff" opacity=".92"/></g></svg></span><span class="btnLabel">Expert Quest</span></button>
-        <div class="modePill" id="modePill"><span class="dot"></span> <span id="modeText">Mode: Install</span></div>
+        <div class="controlsRight">
+          <div class="modePill" id="modePill"><span class="dot"></span> <span id="modeText">Mode: Install</span></div>
+        </div>
       </div>
 
       <div class="quickAccess" aria-label="Quick access tools">
-        <button class="quickBtn quickBtnSafety" id="quickSafety" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">⚠️</span><span class="btnLabel">Before You Begin Work</span></button>
         <button class="quickBtn quickBtnCode" id="quickCode" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">🧰</span><span class="btnLabel">CODE</span></button>
         <button class="quickBtn quickBtnRef" id="quickReference" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📘</span><span class="btnLabel">Reference</span></button>
+        <button class="quickBtn quickBtnInstallRef" id="quickInstallReferences" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📋</span><span class="btnLabel">Install References</span></button>
         <button class="quickBtn quickBtnRes" id="quickResources" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📚</span><span class="btnLabel">Related Topics &amp; Resources</span></button>
+        <button class="quickBtn gray" id="btnFeedback" type="button" aria-pressed="false"><span class="btnIcon emoji" aria-hidden="true">💬</span><span class="btnLabel">Share Feedback</span></button>
+        <button class="quickBtn quickBtnRef" id="btnUserGuide" type="button" aria-pressed="false"><span class="btnIcon emoji" aria-hidden="true">📘</span><span class="btnLabel">User Guide / How to Use</span></button>
       </div>
 
       <div id="quickPanelsHost" class="quickPanelsHost" aria-live="polite">
-        <section class="quickPanel safetyPanel" id="panelSafety" hidden>
-          <div class="quickPanelHead">
-            <div>
-              <div class="quickPanelKicker">Safety First</div>
-              <div class="quickPanelTitle">Before You Begin Work</div>
-            </div>
-            <button class="panelClose" type="button" data-close="panelSafety" aria-label="Close Before You Begin Work">×</button>
-          </div>
-          <div class="quickPanelBody">
-            <div class="safetyBody quickSafetyBody" style="padding:0">
-              <p><strong>PPE:</strong> Wear all required PPE for the job function (and any local/site requirements) before starting work.</p>
-              <p><strong>FVD:</strong> Use a Foreign Voltage Detector when conditions warrant before contacting metallic enclosures/terminals. Treat circuits as energized until verified safe.</p>
-              <details class="safetyWhy">
-                <summary>Why this matters</summary>
-                <ul>
-                  <li>Foreign voltage can exist on customer wiring/plant and may not be obvious.</li>
-                  <li>Verifying safety first reduces shock risk and prevents equipment damage.</li>
-                  <li>Builds customer trust: safe, professional, consistent field behavior.</li>
-                </ul>
-              </details>
-            </div>
-          </div>
-        </section>
 
         <section class="quickPanel codeQuickPanel" id="panelCode" hidden>
           <div class="quickPanelHead">
@@ -1068,6 +1208,30 @@
           </div>
         </section>
 
+        <section class="quickPanel" id="panelInstallReferences" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Install Reference</div>
+              <div class="quickPanelTitle">Install References</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelInstallReferences" aria-label="Close Install References">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <ul class="bulletRefs">
+              <li>
+                <strong>Scope checkpoints (typical):</strong>
+                PFP jumper → PFP bulkhead → Launch cable → End of Drop → End of Home Run → SFP / both ends jumper.
+                <div class="itemDetail">Use Atlas scope workflow and verify uploads.</div>
+              </li>
+              <li>
+                <strong>True Test checkpoints (typical):</strong>
+                PFP / assigned APN, End of Drop (outside), Inside Home after SFP/jumper.
+                <div class="itemDetail">Follow local guidance if counts differ by market/job type.</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
         <section class="quickPanel" id="panelResources" hidden>
           <div class="quickPanelHead">
             <div>
@@ -1133,27 +1297,133 @@
             </div>
           </div>
         </section>
-      </div>
 
+        <section class="quickPanel" id="panelFeedback" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Your Feedback Matters</div>
+              <div class="quickPanelTitle">Share Feedback</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelFeedback" aria-label="Close Share Feedback">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <p class="hint" style="margin-top:0">Help improve the app by sharing what is working well, what could be improved, and what should be added next. This opens your device email app, so submissions are not anonymous.</p>
+            <form id="feedbackForm" class="feedbackForm">
+              <div class="feedbackGrid">
+                <label>
+                  <span>Overall experience</span>
+                  <select name="overall">
+                    <option>Excellent</option>
+                    <option>Good</option>
+                    <option>Needs improvement</option>
+                    <option>Not useful</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Ease of use</span>
+                  <select name="ease">
+                    <option>Very easy</option>
+                    <option>Easy</option>
+                    <option>Moderate</option>
+                    <option>Difficult</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                <span>What is working well?</span>
+                <textarea name="working" rows="3" placeholder="Examples: marker flow, safety reminders, quick access tools..."></textarea>
+              </label>
+              <label>
+                <span>What could be improved?</span>
+                <textarea name="improve" rows="3" placeholder="Examples: layout, wording, flow, navigation..."></textarea>
+              </label>
+              <label>
+                <span>What feels unnecessary or out of place?</span>
+                <textarea name="remove" rows="3" placeholder="Anything that should be simplified, moved, or removed?"></textarea>
+              </label>
+              <label>
+                <span>What should be added?</span>
+                <textarea name="add" rows="3" placeholder="Examples: references, troubleshooting steps, tools, links..."></textarea>
+              </label>
+<div class="feedbackActions">
+                <button class="btn blueBtn" type="submit">Submit Feedback</button>
+                <div class="feedbackNote">Submitting opens your email app addressed to  with your responses prefilled.</div>
+              </div>
+            </form>
+          </div>
+        </section>
 
-      <div class="safety legacySafety" role="note" aria-label="Safety reminder">
-        <div class="safetyHdr">
-          <span class="safetyIcon" aria-hidden="true">⚠️</span>
-          Safety Reminder — PPE &amp; FVD (Foreign Voltage Detector)
-        </div>
-        <div class="safetyBody">
-          <p><strong>PPE:</strong> Wear all required PPE for the job function (and any local/site requirements) before starting work.</p>
-          <p><strong>FVD:</strong> Use a Foreign Voltage Detector when conditions warrant before contacting metallic enclosures/terminals. Treat circuits as energized until verified safe.</p>
-          <details>
-            <summary>Why this matters</summary>
-            <ul>
-              <li>Foreign voltage can exist on customer wiring/plant and may not be obvious.</li>
-              <li>Verifying safety first reduces shock risk and prevents equipment damage.</li>
-              <li>Builds customer trust: safe, professional, consistent field behavior.</li>
-            </ul>
-          </details>
-        </div>
-      </div>
+        <section class="quickPanel" id="panelUserGuide" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Quick Start</div>
+              <div class="quickPanelTitle">User Guide / How to Use</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelUserGuide" aria-label="Close User Guide">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <div class="guideGrid">
+              <div class="guideCard">
+                <h4>What this app is for</h4>
+                <p>This tool helps technicians stay aligned to the AT&amp;T Expert Path during fiber installs and repairs. It is meant to keep work on track, reinforce accountability, and improve field quality.</p>
+              </div>
+              <div class="guideCard">
+                <h4>Install vs Repair</h4>
+                <p>Use <strong>Install</strong> for fiber installation jobs and <strong>Repair</strong> for service trouble / troubleshooting visits. The app automatically switches the markers and checklist based on the selected mode.</p>
+              </div>
+              <div class="guideCard">
+                <h4>Expert Quest</h4>
+                <p><strong>Expert Quest</strong> is optional. It encourages extra quality behaviors such as photo uploads, customer Wi‑Fi education, and Smart Home Manager support.</p>
+              </div>
+              <div class="guideCard">
+                <h4>Top quick-access tools</h4>
+                <ul>
+                  <li><strong>CODE:</strong> quick culture and quality expectations</li>
+                  <li><strong>Reference:</strong> field reminders and process guidance</li>
+                  <li><strong>Install References:</strong> install-specific checkpoints and notes</li>
+                  <li><strong>Related Topics &amp; Resources:</strong> supporting topics and links</li>
+                  <li><strong>Share Feedback:</strong> submit app improvement ideas</li>
+                </ul>
+              </div>
+              <div class="guideCard">
+                <h4>Marker navigation</h4>
+                <p>The horizontal marker rail lets technicians jump directly to a marker. Each section contains checklist items meant to keep the job aligned to the Expert Path and reduce missed steps.</p>
+              </div>
+              <div class="guideCard">
+                <h4>Progress tracker</h4>
+                <p><strong>Sections done</strong> shows completed marker sections. <strong>Items done</strong> shows checked checklist items. Use this as a self-audit before closing the job.</p>
+              </div>
+              <div class="guideCard">
+                <h4>Expand / Collapse / Reset</h4>
+                <ul>
+                  <li><strong>Expand all:</strong> opens all checklist sections</li>
+                  <li><strong>Collapse all:</strong> closes all sections</li>
+                  <li><strong>Reset progress:</strong> clears completed checklist items</li>
+                  <li><strong>Complete &amp; Clear:</strong> quick review / clear action</li>
+                </ul>
+              </div>
+              <div class="guideCard">
+                <h4>Safety buttons</h4>
+                <p>The lower safety buttons keep technicians mindful of critical pre-work reminders such as PPE, FVD, and job-site readiness before starting the main checklist.</p>
+              </div>
+              <div class="guideCard">
+                <h4>Recommended workflow</h4>
+                <ol>
+                  <li>Select <strong>Install</strong> or <strong>Repair</strong></li>
+                  <li>Review the safety reminders before starting work</li>
+                  <li>Use the marker rail or expand sections</li>
+                  <li>Check off items as work is completed</li>
+                  <li>Use references and resources when needed</li>
+                  <li>Review progress before closing the job</li>
+                </ol>
+              </div>
+              <div class="guideCard">
+                <h4>Feedback</h4>
+                <p>Use <strong>Share Feedback</strong> to send suggestions, issues, or improvements. Submitting feedback will open your device’s email app with the information ready to send.</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
       <div class="stats">
         <div class="stat">
@@ -1179,24 +1449,45 @@
         <button class="btn" id="collapseAll" type="button">Collapse all</button>
         <button class="btn danger" id="reset" type="button">Reset progress</button>
         <button class="btn" id="completeClear" type="button" title="Mark all items complete then clear (useful at job close)">Complete &amp; Clear</button>
-        <button class="btn" id="toggleInstallReferences" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📋</span><span class="btnLabel">Install References</span></button>
+              </div>
+
+      <div class="actionToggles">
+        <button class="quickBtn quickBtnWarn" id="toggleSafetyReminder" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">⚠️</span><span class="btnLabel">Safety Reminder — PPE &amp; FVD</span></button>
+        <button class="quickBtn quickBtnSafety" id="quickSafety" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">⚠️</span><span class="btnLabel">Before You Begin Work</span></button>
       </div>
 
-      <section class="actionTogglePanel" id="installReferencesPanel" hidden>
-        <h3>Install Scoping &amp; True Test (Reference)</h3>
+      <section class="actionTogglePanel safetyActionPanel" id="safetyReminderActionPanel" hidden>
+        <h3>Safety Reminder — PPE &amp; FVD (Foreign Voltage Detector)</h3>
+        <p><strong>PPE:</strong> Wear all required PPE for the job function (and any local/site requirements) before starting work.</p>
+        <p><strong>FVD:</strong> Use a Foreign Voltage Detector when conditions warrant before contacting metallic enclosures/terminals. Treat circuits as energized until verified safe.</p>
+        <div class="refBox" style="margin-top:14px;border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.03)">
+          <h4 style="margin-top:0">Why this matters</h4>
+          <ul>
+            <li>Foreign voltage can exist on customer wiring/plant and may not be obvious.</li>
+            <li>Verifying safety first reduces shock risk and prevents equipment damage.</li>
+            <li>Builds customer trust: safe, professional, consistent field behavior.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="actionTogglePanel safetyActionPanel" id="beforeWorkActionPanel" hidden>
+        <h3>Before You Begin Work</h3>
         <ul class="bulletRefs">
           <li>
-            <strong>Scope checkpoints (typical):</strong>
-            PFP jumper → PFP bulkhead → Launch cable → End of Drop → End of Home Run → SFP / both ends jumper.
-            <div class="itemDetail">Use Atlas scope workflow and verify uploads.</div>
+            <strong>Wear all required PPE appropriate to the job function.</strong>
+            <div class="itemDetail">Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required.</div>
           </li>
           <li>
-            <strong>True Test checkpoints (typical):</strong>
-            PFP / assigned APN, End of Drop (outside), Inside Home after SFP/jumper.
-            <div class="itemDetail">Follow local guidance if counts differ by market/job type.</div>
+            <strong>Use a Foreign Voltage Detector (FVD) when conditions warrant before contacting metallic enclosures/terminals.</strong>
+            <div class="itemDetail">Treat circuits as energized until verified safe. Verify tool function per local guidance.</div>
+          </li>
+          <li>
+            <strong>Confirm job-site safety standards are met before starting work.</strong>
+            <div class="itemDetail">Pause and reassess if conditions are unsafe (weather, pets, trip hazards, unsafe access).</div>
           </li>
         </ul>
       </section>
+
 
       
           <div class="codeBlock legacyCodeBlock" hidden>
@@ -1425,13 +1716,6 @@
   /* ---------- Data ---------- */
   // NOTE: Avoid property names like "sub" to prevent collisions with String.prototype.sub in some render paths.
   const INSTALL = [
-    
-    // SAFETY FIRST (non-marker)
-{ id:"i0", marker:null, title:"Safety First", kicker:"Before beginning work", reminder:true, items:[
-  { id:"i0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
-  { id:"i0_fvd", text:"Use a Foreign Voltage Detector (FVD) when conditions warrant before contacting metallic enclosures/terminals.", detail:"Treat circuits as energized until verified safe. Verify tool function per local guidance." },
-  { id:"i0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe (weather, pets, trip hazards, unsafe access)." }
-]},
 
     { id:"precall", marker:null, title:"Dispatch / Pre-Call", kicker:"", items:[
       { id:"precall_1", text:"Review dispatch details, then perform the Pre-Call within 15 minutes of dispatching by calling the CBR.", detail:"If no answer, leave a voicemail and send a text message." }
@@ -1508,11 +1792,6 @@
   ];
 
   const REPAIR = [
-    // SAFETY FIRST (non-marker)
-    { id:"r0", marker:null, title:"Safety First", kicker:"Before beginning work", reminder:true, items:[
-      { id:"r0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
-      { id:"r0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe." }
-    ]},
 
     { id:"r1", marker:1, title:"Dispatch, Preview & Contact", kicker:"Marker 1", items:[
       { id:"r1_dispatch", text:"Review dispatch details in Atlas.", detail:"Confirm trouble reported and appointment details." },
@@ -2031,20 +2310,43 @@ function renderQuickResources(){
     }, 300);
   });
 
-  $("toggleInstallReferences")?.addEventListener("click", () => {
-    const panel = $("installReferencesPanel");
+
+
+  function closeInlineSafetyPanels(exceptId = ""){
+    ["safetyReminderActionPanel","beforeWorkActionPanel"].forEach(id => {
+      const p = $(id);
+      if(p && id !== exceptId) p.hidden = true;
+    });
+    if($("toggleSafetyReminder")) $("toggleSafetyReminder").setAttribute("aria-expanded", String(exceptId === "safetyReminderActionPanel" && !$("safetyReminderActionPanel").hidden));
+    if($("quickSafety")) $("quickSafety").setAttribute("aria-expanded", String(exceptId === "beforeWorkActionPanel" && !$("beforeWorkActionPanel").hidden));
+  }
+
+  $("toggleSafetyReminder")?.addEventListener("click", () => {
+    const panel = $("safetyReminderActionPanel");
     if(!panel) return;
-    panel.hidden = !panel.hidden;
-    updateInstallReferencesUI();
-    if(!panel.hidden) panel.scrollIntoView({behavior:"smooth", block:"nearest"});
+    const willOpen = panel.hidden;
+    closeInlineSafetyPanels();
+    panel.hidden = !willOpen;
+    $("toggleSafetyReminder").setAttribute("aria-expanded", String(willOpen));
+    if(willOpen) panel.scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
+
+  $("quickSafety")?.addEventListener("click", () => {
+    const panel = $("beforeWorkActionPanel");
+    if(!panel) return;
+    const willOpen = panel.hidden;
+    closeInlineSafetyPanels();
+    panel.hidden = !willOpen;
+    $("quickSafety").setAttribute("aria-expanded", String(willOpen));
+    if(willOpen) panel.scrollIntoView({behavior:"smooth", block:"nearest"});
   });
 
 
   /* ---------- Quick Access Panels ---------- */
   const QUICK_PANEL_MAP = {
-    quickSafety: "panelSafety",
     quickCode: "panelCode",
     quickReference: "panelReference",
+    quickInstallReferences: "panelInstallReferences",
     quickResources: "panelResources"
   };
 
@@ -2057,11 +2359,37 @@ function renderQuickResources(){
     const qBtn = $("btnExpertQuest");
     const qPanel = $("panelExpertQuest");
     if(qBtn && qPanel) qBtn.setAttribute("aria-pressed", String(!qPanel.hidden));
+    const fBtn = $("btnFeedback");
+    const fPanel = $("panelFeedback");
+    if(fBtn && fPanel) fBtn.setAttribute("aria-pressed", String(!fPanel.hidden));
+    const gBtn = $("btnUserGuide");
+    const gPanel = $("panelUserGuide");
+    if(gBtn && gPanel) gBtn.setAttribute("aria-pressed", String(!gPanel.hidden));
+  }
+
+  const QUICK_PANEL_CLASS = {
+    panelCode: "openCode",
+    panelReference: "openReference",
+    panelInstallReferences: "openInstallRef",
+    panelResources: "openResources",
+    panelExpertQuest: "openQuest",
+    panelFeedback: "openReference",
+    panelUserGuide: "openReference"
+  };
+
+  function applyQuickPanelClass(panel){
+    if(!panel) return;
+    Object.values(QUICK_PANEL_CLASS).forEach(cls => panel.classList.remove(cls));
+    const next = QUICK_PANEL_CLASS[panel.id];
+    if(next && !panel.hidden) panel.classList.add(next);
   }
 
   function closePanel(panelId){
     const panel = $(panelId);
-    if(panel) panel.hidden = true;
+    if(panel){
+      panel.hidden = true;
+      applyQuickPanelClass(panel);
+    }
     setPanelButtonState();
   }
 
@@ -2069,6 +2397,7 @@ function renderQuickResources(){
     const panel = $(panelId);
     if(!panel) return;
     panel.hidden = !panel.hidden;
+    applyQuickPanelClass(panel);
     setPanelButtonState();
     if(!panel.hidden) panel.scrollIntoView({behavior:"smooth", block:"start"});
   }
@@ -2079,6 +2408,7 @@ function renderQuickResources(){
   });
 
   $("btnExpertQuest")?.addEventListener("click", () => togglePanel("panelExpertQuest"));
+  $("btnFeedback")?.addEventListener("click", () => togglePanel("panelFeedback"));
   document.querySelectorAll("[data-close]").forEach(btn => {
     btn.addEventListener("click", () => closePanel(btn.getAttribute("data-close")));
   });
@@ -2096,10 +2426,65 @@ function renderQuickResources(){
     });
   }
 
+  $("feedbackForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const lines = [
+      "AT&T Fiber Expert Path App Feedback",
+      "",
+      "Overall experience: " + (fd.get("overall") || ""),
+      "Ease of use: " + (fd.get("ease") || ""),
+      "",
+      "What is working well?",
+      String(fd.get("working") || ""),
+      "",
+      "What could be improved?",
+      String(fd.get("improve") || ""),
+      "",
+      "What feels unnecessary or out of place?",
+      String(fd.get("remove") || ""),
+      "",
+      "What should be added?",
+      String(fd.get("add") || ""),
+      "",
+      "Submitted via device email app"
+    ];
+    const subject = encodeURIComponent("Expert Path App Feedback");
+    const body = encodeURIComponent(lines.join("\n"));
+    window.location.href = "mailto:?subject=" + subject + "&body=" + body;
+  });
+
   /* ---------- Initial render ---------- */
   render();
 
 })();
 </script>
+
+<script>
+(function(){
+  var btn = document.getElementById('btnUserGuide');
+  var panel = document.getElementById('panelUserGuide');
+  if(!btn || !panel) return;
+
+  btn.addEventListener('click', function(ev){
+    ev.preventDefault();
+    panel.hidden = !panel.hidden;
+    if(!panel.hidden){
+      panel.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    btn.setAttribute('aria-pressed', String(!panel.hidden));
+  });
+
+  var closeBtn = panel.querySelector('[data-close="panelUserGuide"]');
+  if(closeBtn){
+    closeBtn.addEventListener('click', function(ev){
+      ev.preventDefault();
+      panel.hidden = true;
+      btn.setAttribute('aria-pressed', 'false');
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
