@@ -67,8 +67,8 @@
     .dot{width:9px;height:9px;border-radius:99px;background:var(--blue);box-shadow:0 0 0 3px rgba(26,167,225,.18)}
     .pill.green .dot{background:var(--green);box-shadow:0 0 0 3px rgba(121,193,66,.18)}
     .titleRow{display:flex;align-items:flex-start;gap:12px;margin-top:14px}
-    .logo{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;filter:drop-shadow(0 4px 16px rgba(0,0,0,.35));transform:translateY(0)}
-    .logo svg{width:40px;height:40px;display:block}
+    .logo{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;filter:drop-shadow(0 4px 16px rgba(0,0,0,.35));transform:translateY(0)}
+    .logo svg{width:44px;height:44px;display:block}
     .logo svg{opacity:.95}
     #appTitle.title{font-size:32px;line-height:1.02;margin:0;letter-spacing:.4px}
 .title--repair{
@@ -204,6 +204,25 @@
       color:rgba(255,220,224,.95);
     }
     .btn:active{transform:translateY(1px)}
+    .btn.toggleActive{
+      border-color:rgba(26,167,225,.45);
+      background:rgba(26,167,225,.12);
+      color:#eef7ff;
+      box-shadow:0 0 0 1px rgba(26,167,225,.15) inset;
+    }
+    .actionTogglePanel{
+      margin:0 18px 14px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+    }
+    .actionTogglePanel[hidden]{display:none !important}
+    .actionTogglePanel h3{margin:0 0 10px;font-size:18px}
+    .actionTogglePanel .itemDetail{margin-top:5px}
+    .bulletRefs{margin:0;padding-left:18px;display:grid;gap:10px}
+    .bulletRefs li{color:var(--text)}
+    .bulletRefs strong{display:block;font-size:15px}
     .section{
       margin-top:14px;
       border-top:1px solid var(--stroke);
@@ -266,6 +285,10 @@
     .itemText{min-width:0}
     .itemTitle{font-weight:800}
     .itemDetail{color:var(--muted2);font-size:13px;margin-top:3px}
+    .items--reminder{display:grid;gap:14px}
+    .item--reminder{padding:20px 18px;border-radius:24px}
+    .item--reminder .itemTitle{font-size:18px;line-height:1.2}
+    .item--reminder .itemDetail{font-size:15px;line-height:1.35;margin-top:8px}
     .codeBlock{
       margin:18px;
       border-radius:22px;
@@ -352,7 +375,9 @@
     @media (max-width:720px){
       h1{font-size:28px}
       .stats{grid-template-columns:1fr}
-      .codeGrid{grid-template-columns:1fr}
+      .codeGrid,.codeQuickGrid,.resourcesGrid{grid-template-columns:1fr}
+      .quickAccess{padding-top:12px}
+      .quickBtn,.questBtn{width:100%}
     }
   
 /* Scoping / Cleaning / True Test callouts */
@@ -434,6 +459,43 @@
     .codeBody li{margin:6px 0}
 
   .flash{outline:2px solid rgba(0,0,0,.18); outline-offset:4px; border-radius:14px;}
+
+
+.quickSafetyBody{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:4px !important;
+}
+.safetyWhy{
+  margin-top:12px;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:8px;
+}
+.safetyWhy summary{
+  padding:10px 0 4px 0;
+  font-size:15px;
+}
+.codePanelsQuick{margin-top:2px}
+.resourceSearchWrap{
+  display:block;
+  margin-bottom:12px;
+}
+.resourceSearch{
+  width:100%;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.18);
+  color:var(--text);
+  padding:12px 14px;
+  font:inherit;
+  outline:none;
+}
+.resourceSearch::placeholder{color:var(--muted2)}
+.resourceSearch:focus{
+  border-color:rgba(26,167,225,.45);
+  box-shadow:0 0 0 3px rgba(26,167,225,.12);
+}
+.resourceCard[hidden]{display:none !important;}
+
 
 
 /* Safety callout */
@@ -651,6 +713,114 @@
 .bar>div{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg, rgba(26,167,216,.95), rgba(140,198,62,.92));transition:width .25s ease}
 .progressMeta{margin-top:6px;color:rgba(231,238,247,.70);font-weight:850;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
+
+    .legacyCodeBlock,.legacyRefs{display:none !important}
+    .quickAccess{
+      padding:14px 18px 0;
+      display:flex;gap:10px;flex-wrap:wrap;
+    }
+    .quickBtn{
+      appearance:none;border:none;cursor:pointer;
+      padding:12px 16px;border-radius:16px;
+      font-weight:900;letter-spacing:.02em;
+      border:1px solid var(--stroke);
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      transition:all .15s ease;
+    }
+    .quickBtn:hover,.questBtn:hover{transform:translateY(-1px)}
+    .quickBtn[aria-expanded="true"], .questBtn[aria-pressed="true"]{
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 8px 22px rgba(0,0,0,.22);
+    }
+    .btnIcon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.2));flex:0 0 auto;}
+    .btnIcon svg{width:18px;height:18px;display:block;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .btnIcon svg.fill{fill:currentColor;stroke:none;}
+    .btnLabel{display:inline-flex;align-items:center;}
+    .quickBtnSafety{background:rgba(255,77,94,.12);border-color:rgba(255,77,94,.32);color:#ffe7ea}
+    .quickBtnCode{background:rgba(121,193,66,.12);border-color:rgba(121,193,66,.35)}
+    .quickBtnRef{background:rgba(26,167,225,.10);border-color:rgba(26,167,225,.30)}
+    .quickBtnRes{background:rgba(255,255,255,.08)}
+    .questBtn{
+      display:inline-flex;align-items:center;gap:14px;
+      padding:10px 18px 10px 10px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border-color:rgba(168,85,247,.38);
+      color:var(--text);
+      min-width:220px;
+    }
+    .questBtn[aria-pressed="true"]{
+      border-color:rgba(168,85,247,.58);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 10px 26px rgba(88,28,135,.28);
+    }
+    .questBadge{
+      width:46px;height:46px;border-radius:999px;display:grid;place-items:center;flex:0 0 auto;
+      background:radial-gradient(circle at 30% 25%, #b168ff 0%, #7c3aed 42%, #2f61d5 100%);
+      box-shadow:0 8px 20px rgba(91,33,182,.34), inset 0 0 0 1px rgba(255,255,255,.22);
+      color:#fff;
+    }
+    .questBadge svg{width:28px;height:28px;display:block}
+    .quickPanelsHost{padding:14px 18px 0;display:grid;gap:12px}
+    .quickPanel{
+      border:1px solid var(--stroke);
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:0 16px 38px rgba(0,0,0,.24);
+      overflow:hidden;
+    }
+    .quickPanelHead{
+      padding:14px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .quickPanelKicker{color:var(--muted2);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+    .quickPanelTitle{font-size:20px;font-weight:900;letter-spacing:.02em}
+    .quickPanelBody{padding:16px}
+    .panelClose{
+      appearance:none;border:none;cursor:pointer;
+      width:36px;height:36px;border-radius:12px;
+      background:rgba(255,255,255,.06);color:var(--text);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:22px;line-height:1;
+    }
+    .codeLegend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .legendChip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(121,193,66,.35);background:rgba(121,193,66,.10);
+      font-weight:800
+    }
+    .legendChip span{
+      width:24px;height:24px;border-radius:8px;display:grid;place-items:center;
+      border:2px solid var(--green);background:#0b1214;color:#fff;font-weight:1000;
+    }
+    .codeQuickGrid,.resourcesGrid{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+    }
+    .codeQuickCard,.resourceCard{
+      border-radius:18px;border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.16);padding:14px;
+    }
+    .codeQuickCard{display:flex;gap:12px;align-items:flex-start}
+    .codeLetter{
+      width:42px;height:42px;border-radius:14px;flex:0 0 auto;display:grid;place-items:center;
+      border:2px solid var(--green);background:#0b1214;color:#fff;font-weight:1000;
+    }
+    .codeQuickText h4,.resourceCard h4{margin:0 0 8px 0}
+    .codeQuickText p,.resourceCard p{margin:0 0 8px 0;color:var(--muted)}
+    a.resourceCard{display:block;text-decoration:none;color:var(--text)}
+    a.resourceCard:hover{border-color:rgba(26,167,225,.30);box-shadow:0 8px 22px rgba(0,0,0,.20)}
+    .codeQuickText ul{margin:0 0 0 18px;padding:0}
+    .codeQuickText li{margin:6px 0;color:var(--muted)}
+    .questPanel{border-color:rgba(140,82,255,.38)}
+    .questItems .item input[type="checkbox"]{accent-color:#8c52ff}
+
+    .xpReward{display:inline-flex;align-items:center;gap:6px;font-weight:900;color:#f4dd95;white-space:nowrap}
+    .xpToken{width:16px;height:16px;display:inline-block;border-radius:50%;background:radial-gradient(circle at 35% 35%, #fff4c5 0 28%, #f1c65a 29%, #c98a1d 72%, #8a5a10 100%);box-shadow:0 0 0 2px rgba(255,221,149,.18), inset 0 0 0 2px rgba(255,247,210,.42), 0 0 10px rgba(224,172,54,.18);position:relative;flex:0 0 auto}
+    .xpToken:after{content:"";position:absolute;inset:3px;border-radius:50%;border:1.5px solid rgba(133,84,12,.45)}
+    .questItems .itemTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
 </style>
 </head>
 <body>
@@ -663,8 +833,8 @@
         </div>
 
         <div class="titleRow">
-          <div class="logo" aria-hidden="true" title="AT&T">
-            <!-- Globe icon (inline SVG) -->
+          
+          <div class="logo" aria-hidden="true" title="AT&amp;T">
             <svg width="44" height="44" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
               <defs>
                 <radialGradient id="gGlow" cx="35%" cy="30%" r="80%">
@@ -686,26 +856,287 @@
           </div>
           <div>
             <h1 id="appTitle" class="title title--install">AT&amp;T <span class="fiber">fiber</span> <span class="ep">Expert Path</span></h1>
-            <div class="sub"><strong>AFO</strong> — Expert Path Checklist. Tap checkboxes as you complete steps. Progress saves automatically on this device.</div>
+            <div class="sub" id="appSubtitle"><strong>AFO</strong> — Expert Path Checklist. Tap checkboxes as you complete steps. Progress saves automatically on this device.</div>
           </div>
         </div>
         <div class="heroDivider" aria-hidden="true"></div>
       </div>
 
+      
       <div class="controls">
         <div class="seg" role="group" aria-label="Mode">
           <button id="btnInstall" aria-pressed="true" type="button">Install</button>
           <button id="btnRepair" aria-pressed="false" type="button">Repair</button>
         </div>
-        <div class="wip" title="Work in progress (not active yet)">
-          <span class="dot"></span>
-          Wi‑Fi Extenders (WIP)
-        </div>
+        <button class="btn questBtn" id="btnExpertQuest" type="button" aria-pressed="false"><span class="questBadge" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M11 18h21v8H19v12h13v8H11z" fill="#fff" opacity=".98"/><circle cx="41" cy="31" r="11" stroke="#fff" stroke-width="6"/><path d="M49 39l8 8" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M41 5l3.2 8h-6.4L41 5zm0 52l3.2-8h-6.4L41 57zM18 31l8-3.2v6.4L18 31zm46 0l-8 3.2v-6.4L64 31z" fill="#fff" opacity=".92"/></g></svg></span><span class="btnLabel">Expert Quest</span></button>
         <div class="modePill" id="modePill"><span class="dot"></span> <span id="modeText">Mode: Install</span></div>
       </div>
 
+      <div class="quickAccess" aria-label="Quick access tools">
+        <button class="quickBtn quickBtnSafety" id="quickSafety" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">⚠️</span><span class="btnLabel">Before You Begin Work</span></button>
+        <button class="quickBtn quickBtnCode" id="quickCode" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">🧰</span><span class="btnLabel">CODE</span></button>
+        <button class="quickBtn quickBtnRef" id="quickReference" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📘</span><span class="btnLabel">Reference</span></button>
+        <button class="quickBtn quickBtnRes" id="quickResources" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📚</span><span class="btnLabel">Related Topics &amp; Resources</span></button>
+      </div>
 
-      <div class="safety" role="note" aria-label="Safety reminder">
+      <div id="quickPanelsHost" class="quickPanelsHost" aria-live="polite">
+        <section class="quickPanel safetyPanel" id="panelSafety" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Safety First</div>
+              <div class="quickPanelTitle">Before You Begin Work</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelSafety" aria-label="Close Before You Begin Work">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <div class="safetyBody quickSafetyBody" style="padding:0">
+              <p><strong>PPE:</strong> Wear all required PPE for the job function (and any local/site requirements) before starting work.</p>
+              <p><strong>FVD:</strong> Use a Foreign Voltage Detector when conditions warrant before contacting metallic enclosures/terminals. Treat circuits as energized until verified safe.</p>
+              <details class="safetyWhy">
+                <summary>Why this matters</summary>
+                <ul>
+                  <li>Foreign voltage can exist on customer wiring/plant and may not be obvious.</li>
+                  <li>Verifying safety first reduces shock risk and prevents equipment damage.</li>
+                  <li>Builds customer trust: safe, professional, consistent field behavior.</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section class="quickPanel codeQuickPanel" id="panelCode" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Customer Experience</div>
+              <div class="quickPanelTitle">CODE</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelCode" aria-label="Close CODE">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <div class="codePanels codePanelsQuick">
+              <details class="codePanel" open>
+                <summary>
+                  <div class="codeIcon greenRing">C</div>
+                  <div class="codeSum">
+                    <div class="big">Care for Customers and Each Other</div>
+                    <div class="small">Make it personal • Lead with respect &amp; safety</div>
+                  </div>
+                  <div class="chev">⌄</div>
+                </summary>
+                <div class="codeBody">
+                  <p>AT&amp;T’s focus is always to serve customers first. When you Care for Customers and Each Other, you Make It Personal—show empathy, treat people with value and respect, and build trust.</p>
+                  <p>Put yourself in the customer’s shoes. Recognize the difference between sympathy and empathy so you can see the situation from the customer’s point of view—especially when invited into a customer’s premises.</p>
+                  <h4>Key Ways to Personalize the Experience</h4>
+                  <ul>
+                    <li>Be a good listener, show empathy, and adjust your tone based on how the customer feels.</li>
+                    <li>Respect customers and their individual differences.</li>
+                    <li>Treat customers the way you want to be treated.</li>
+                    <li>Ask thoughtful questions to understand the customer’s needs.</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="codePanel">
+                <summary>
+                  <div class="codeIcon greenRing">O</div>
+                  <div class="codeSum">
+                    <div class="big">Own It</div>
+                    <div class="small">Own the complexity • Make it simple for customers</div>
+                  </div>
+                  <div class="chev">⌄</div>
+                </summary>
+                <div class="codeBody">
+                  <p>Owning It means being committed to finding the right solution for each customer—listen, anticipate needs, solve problems, and deliver outcomes that positively impact customers’ lives.</p>
+                  <p>You Own It when you hold yourself accountable for delivering excellence and operating with integrity every day. Focus your message on the resolution to build customer confidence.</p>
+                  <h4>How to Take Ownership (Confidently &amp; Effectively)</h4>
+                  <ul>
+                    <li>Listen to the customer’s needs first.</li>
+                    <li>Ask insightful questions to confirm understanding.</li>
+                    <li>Understand the issue and set realistic expectations.</li>
+                    <li>Commit to finding the solution.</li>
+                    <li>Keep it positive and focus on the resolution.</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="codePanel">
+                <summary>
+                  <div class="codeIcon greenRing">D</div>
+                  <div class="codeSum">
+                    <div class="big">Deliver with Expertise</div>
+                    <div class="small">Be authentic • Do it right, document it right</div>
+                  </div>
+                  <div class="chev">⌄</div>
+                </summary>
+                <div class="codeBody">
+                  <p>Bring your own personality and professional integrity into the customer relationship. When you’re the expert, you can simplify the experience and communicate a clear plan of action.</p>
+                  <p>Customers appreciate honesty and clear communication. Use what the customer tells you to develop a customer-centric solution.</p>
+                  <h4>Ways to Deliver with Expertise</h4>
+                  <ul>
+                    <li>Connect with the customer and bring your personality into the conversation.</li>
+                    <li>Take ownership and commit to the solution.</li>
+                    <li>Educate the customer on tools/services that enhance the experience (e.g., Smart Home Manager, extenders).</li>
+                    <li>Manage expectations and clearly identify the plan.</li>
+                    <li>Use available tools so you’re prepared for anything; offer solutions whenever possible.</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="codePanel">
+                <summary>
+                  <div class="codeIcon greenRing">E</div>
+                  <div class="codeSum">
+                    <div class="big">Exceed Expectations</div>
+                    <div class="small">Make it matter • Create “wow” moments</div>
+                  </div>
+                  <div class="chev">⌄</div>
+                </summary>
+                <div class="codeBody">
+                  <p>Exceeding expectations means Making It Matter—putting the customer first and looking for opportunities to surprise and delight with exceptional service.</p>
+                  <p>A “wow” moment can be a gesture, solution, or act of service that helps the customer feel valued and supported.</p>
+                  <h4>Ways to Exceed Expectations</h4>
+                  <ul>
+                    <li>Review the customer profile.</li>
+                    <li>Use the customer’s name during interactions.</li>
+                    <li>Sincerely thank the customer for being loyal to AT&amp;T.</li>
+                    <li>Ask about the customer’s experience to help manage expectations.</li>
+                    <li>Go the extra mile to create “wow” moments.</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="codePanel">
+                <summary>
+                  <div class="codeIcon blueRing">CC</div>
+                  <div class="codeSum">
+                    <div class="big">Crucial Conversations</div>
+                    <div class="small">De-escalate • Own it • Build trust</div>
+                  </div>
+                  <div class="chev">⌄</div>
+                </summary>
+                <div class="codeBody">
+                  <p>Handling crucial conversations well improves performance and builds confidence to Own It in any situation.</p>
+                  <h4>What’s True in Crucial Conversations</h4>
+                  <ul>
+                    <li>The customer’s perception is their reality.</li>
+                    <li>Customers are not focused on internal AT&amp;T day-to-day challenges (scheduling, inventory, system issues).</li>
+                    <li>Active listening is essential to Owning It and handling the conversation.</li>
+                    <li>You are empowered to improve the customer’s perception by Owning It and doing the right thing.</li>
+                  </ul>
+                  <h4>Listening Do’s</h4>
+                  <ul>
+                    <li>Give your undivided attention to the customer who is speaking.</li>
+                    <li>Show that you understand with brief confirmations.</li>
+                    <li>Listen for underlying needs in what the customer says.</li>
+                    <li>Ask questions that encourage the customer to clarify their thoughts.</li>
+                    <li>Summarize the main points from time to time.</li>
+                  </ul>
+                  <h4>Listening Don’ts</h4>
+                  <ul>
+                    <li>Don’t assume you know the issue or the customer’s experience.</li>
+                    <li>Don’t interrupt the customer.</li>
+                    <li>Don’t start telling your own stories or change the focus to yourself.</li>
+                    <li>Don’t give advice, judge, divert the topic, or try to cheer the customer up instead of listening.</li>
+                    <li>Don’t give your attention to anything/anyone other than the customer while they are sharing concerns.</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+            <div class="note" style="margin-top:10px;opacity:.85;font-size:12px">
+              Note: Content is condensed for field use. Please use official AT&amp;T training as the source of record.
+            </div>
+          </div>
+        </section>
+
+        <section class="quickPanel" id="panelReference" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Field Reference</div>
+              <div class="quickPanelTitle">Reference</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelReference" aria-label="Close Reference">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <div class="refsGrid">
+              <div class="refItem"><div class="refTitle">TrueTest Reference</div><div class="refDesc">Use the correct launch cable direction, clean first, test second, then verify uploads before moving on.</div></div>
+              <div class="refItem"><div class="refTitle">Scope Guidance</div><div class="refDesc">Scope shutter jumpers, bulkheads, SFPs, and IW endpoints in the proper order for the work location.</div></div>
+              <div class="refItem"><div class="refTitle">Install Flow</div><div class="refDesc">PFP / terminal → outside drop → fiber jack / SFP → activation → Wi‑Fi / education → closeout.</div></div>
+              <div class="refItem"><div class="refTitle">Repair Flow</div><div class="refDesc">Start with network isolation, verify TRUE, address defects, confirm gateway / Wi‑Fi / customer devices, then close accurately.</div></div>
+              <div class="refItem"><div class="refTitle">Troubleshooting</div><div class="refDesc">Neighborhood check, quality check, RR review, and helper/escalation should be used early when results do not clear.</div></div>
+              <div class="refItem"><div class="refTitle">Customer Guidance</div><div class="refDesc">Keep communication simple, own the issue, explain next steps, and avoid jargon.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="quickPanel" id="panelResources" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Reference Links</div>
+              <div class="quickPanelTitle">Related Topics &amp; Resources</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelResources" aria-label="Close Related Topics and Resources">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <label class="resourceSearchWrap" aria-label="Search resources">
+              <input id="resourceSearch" class="resourceSearch" type="search" placeholder="Search related topics or resources..." />
+            </label>
+            <div class="resourcesGrid" id="resourcesGrid">
+              <article class="resourceCard"><h4>Lost light</h4><p>Confirm service state, inspect for damage, clean and scope connection points, then True Test toward the network before replacing parts.</p></article>
+              <article class="resourceCard"><h4>Low optical power</h4><p>Check connectors, jumpers, bends, contamination, and assigned path. Re-clean and re-test before escalating.</p></article>
+              <article class="resourceCard"><h4>ONT activation issues</h4><p>Verify assignment, activation sequence, registration status, light levels, and customer app readiness before closeout.</p></article>
+              <article class="resourceCard"><h4>Wi‑Fi coverage issues</h4><p>Run Wi‑Fi assessment, confirm gateway placement, identify dead zones, explain extenders, and review expected device performance.</p></article>
+              <article class="resourceCard"><h4>B‑Test failures</h4><p>Confirm path and configuration, repeat with clean connection points, verify uploads, and use escalation paths when results remain out of spec.</p></article>
+              <article class="resourceCard"><h4>Customer education misses</h4><p>Before leaving, confirm SHM setup, run a speed test, explain notifications, and answer questions in plain language.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="quickPanel questPanel" id="panelExpertQuest" hidden>
+          <div class="quickPanelHead">
+            <div>
+              <div class="quickPanelKicker">Optional XP</div>
+              <div class="quickPanelTitle">Expert Quest</div>
+            </div>
+            <button class="panelClose" type="button" data-close="panelExpertQuest" aria-label="Close Expert Quest">×</button>
+          </div>
+          <div class="quickPanelBody">
+            <p class="hint" style="margin-top:0">Optional achievements for technicians. These are not required to complete the install or repair.</p>
+            <div class="items questItems">
+              <label class="item">
+                <input type="checkbox" data-item="quest_1" />
+                <div class="itemText">
+                  <div class="itemTitle">Upload job photos <span class="xpReward"><span class="xpToken" aria-hidden="true"></span><strong>10 XP</strong></span></div>
+                  <div class="itemDetail">Capture and upload clear required job photos before closeout.</div>
+                </div>
+              </label>
+              <label class="item">
+                <input type="checkbox" data-item="quest_2" />
+                <div class="itemText">
+                  <div class="itemTitle">Complete customer Wi‑Fi walkthrough <span class="xpReward"><span class="xpToken" aria-hidden="true"></span><strong>5 XP</strong></span></div>
+                  <div class="itemDetail">Show the customer coverage basics, device connection, and expectations.</div>
+                </div>
+              </label>
+              <label class="item">
+                <input type="checkbox" data-item="quest_3" />
+                <div class="itemText">
+                  <div class="itemTitle">Register Smart Home Manager <span class="xpReward"><span class="xpToken" aria-hidden="true"></span><strong>5 XP</strong></span></div>
+                  <div class="itemDetail">Confirm the customer is registered and can access the app.</div>
+                </div>
+              </label>
+              <label class="item">
+                <input type="checkbox" data-item="quest_4" />
+                <div class="itemText">
+                  <div class="itemTitle">Create a “wow” moment <span class="xpReward"><span class="xpToken" aria-hidden="true"></span><strong>5 XP</strong></span></div>
+                  <div class="itemDetail">Go beyond the minimum and leave the customer feeling supported and confident.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <div class="safety legacySafety" role="note" aria-label="Safety reminder">
         <div class="safetyHdr">
           <span class="safetyIcon" aria-hidden="true">⚠️</span>
           Safety Reminder — PPE &amp; FVD (Foreign Voltage Detector)
@@ -748,10 +1179,27 @@
         <button class="btn" id="collapseAll" type="button">Collapse all</button>
         <button class="btn danger" id="reset" type="button">Reset progress</button>
         <button class="btn" id="completeClear" type="button" title="Mark all items complete then clear (useful at job close)">Complete &amp; Clear</button>
+        <button class="btn" id="toggleInstallReferences" type="button" aria-expanded="false"><span class="btnIcon emoji" aria-hidden="true">📋</span><span class="btnLabel">Install References</span></button>
       </div>
 
+      <section class="actionTogglePanel" id="installReferencesPanel" hidden>
+        <h3>Install Scoping &amp; True Test (Reference)</h3>
+        <ul class="bulletRefs">
+          <li>
+            <strong>Scope checkpoints (typical):</strong>
+            PFP jumper → PFP bulkhead → Launch cable → End of Drop → End of Home Run → SFP / both ends jumper.
+            <div class="itemDetail">Use Atlas scope workflow and verify uploads.</div>
+          </li>
+          <li>
+            <strong>True Test checkpoints (typical):</strong>
+            PFP / assigned APN, End of Drop (outside), Inside Home after SFP/jumper.
+            <div class="itemDetail">Follow local guidance if counts differ by market/job type.</div>
+          </li>
+        </ul>
+      </section>
+
       
-          <div class="codeBlock">
+          <div class="codeBlock legacyCodeBlock" hidden>
       <div class="codePanels">
         <details class="codePanel">
       <summary>
@@ -888,7 +1336,7 @@
 
       <div id="sections"></div>
 
-<details id="refsPanel" class="refs">
+<details id="refsPanel" class="refs legacyRefs" hidden>
   <summary>
     <span class="refsTitle">Related Topics & Resources</span>
     <span class="refsHint" id="refsHint">Tap to expand</span>
@@ -897,7 +1345,7 @@
 </details>
 
       <div class="footer">
-        <div><span class="mono" id="buildStamp">Build: v1.2 • Internal field checklist</span></div>
+        <div><span class="mono" id="buildStamp">Build: v3.1 • Internal field checklist</span></div>
         <div style="margin-top:6px">Tip: Add to Home Screen for an “app-like” experience.</div>
       </div>
     </div>
@@ -908,77 +1356,85 @@
   "use strict";
 
   /* ---------- Version / Build ---------- */
-  const BUILD = "v1.0";
+  const BUILD = "v3.8";
   document.getElementById("buildStamp").textContent = `Build: ${BUILD} • Internal field checklist`;
 
   /* ---------- Badge SVG ---------- */
+  
   function badgeSVG(n, mode){
     const isInstall = mode === "install";
-    const fill = isInstall ? "#1aa7d8" : "#8cc63e";
-    const stroke = isInstall ? "rgba(26,167,216,.55)" : "rgba(140,198,62,.55)";
-    const ribbonText = isInstall ? "FIBER INSTALL" : "FIBER REPAIR";
-    const txt = String(n);
-    const fs = txt.length >= 2 ? 22 : 30;
-    const y = txt.length >= 2 ? 42 : 41;
-    // Unified teardrop badge for ALL section icons (matches marker badge style)
+    const num = String(n);
+    const accent = isInstall ? "#25aae1" : "#9fd64e";
+    const line = isInstall ? "rgba(112,212,249,.95)" : "rgba(189,226,113,.95)";
+    const label = isInstall ? "FIBER INSTALL" : "FIBER REPAIR";
+    const uid = `${mode}_${num}_sec`.replace(/[^a-z0-9_]/gi,'');
     return `
-      <svg class="miniBadge" viewBox="0 0 72 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <svg class="miniBadge" viewBox="0 0 92 102" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <defs>
-          <pattern id="topo_sec_${mode}_${txt.replace(/[^a-z0-9]/gi,'')}" width="18" height="18" patternUnits="userSpaceOnUse">
-            <path d="M0 6 C4 2, 8 2, 18 6" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
-            <path d="M0 12 C6 8, 12 8, 18 12" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.1"/>
-            <path d="M3 0 C6 4, 6 8, 3 18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.0"/>
-          </pattern>
+          <clipPath id="clip_${uid}">
+            <path d="M46 6
+                     C59 17 79 30 84 64
+                     L84 82
+                     C73 85 58 88 46 88
+                     C34 88 19 85 8 82
+                     L8 64
+                     C13 30 33 17 46 6Z"/>
+          </clipPath>
         </defs>
-
-        <path d="M36 4
-                 C52 4 64 16 64 34
-                 C64 53 51 70 36 72
-                 C21 70 8 53 8 34
-                 C8 16 20 4 36 4 Z"
-              fill="rgba(255,255,255,.82)"
-              stroke="${stroke}" stroke-width="3"/>
-
-        <path d="M36 10
-                 C48 10 58 20 58 34
-                 C58 49 47 62 36 64
-                 C25 62 14 49 14 34
-                 C14 20 24 10 36 10 Z"
-              fill="${fill}" />
-
-        <path d="M36 10
-                 C48 10 58 20 58 34
-                 C58 49 47 62 36 64
-                 C25 62 14 49 14 34
-                 C14 20 24 10 36 10 Z"
-              fill="url(#topo_sec_${mode}_${txt.replace(/[^a-z0-9]/gi,'')})" opacity="0.9"/>
-
-        <text x="36" y="${y}" text-anchor="middle" font-size="${fs}" font-weight="900" fill="white"
-              font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${txt}</text>
-
-        <path d="M16 56 Q36 66 56 56"
-              fill="rgba(255,255,255,.86)" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
-        <text x="36" y="62" text-anchor="middle" font-size="9" font-weight="900"
-              fill="rgba(17,24,39,.75)" letter-spacing="1.1"
-              font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${ribbonText}</text>
+        <path d="M46 6
+                 C59 17 79 30 84 64
+                 L84 82
+                 C73 85 58 88 46 88
+                 C34 88 19 85 8 82
+                 L8 64
+                 C13 30 33 17 46 6Z"
+              fill="#f2efe8" stroke="${accent}" stroke-width="2"/>
+        <circle cx="46" cy="19" r="4.4" fill="#b7ab90"/>
+        <circle cx="15.5" cy="75.5" r="4.4" fill="#b7ab90"/>
+        <circle cx="76.5" cy="75.5" r="4.4" fill="#b7ab90"/>
+        <path d="M46 20
+                 C56 28 69 36 72 59
+                 L72 70
+                 C64 72.6 55 74.5 46 74.5
+                 C37 74.5 28 72.6 20 70
+                 L20 59
+                 C23 36 36 28 46 20Z"
+              fill="${accent}"/>
+        <g clip-path="url(#clip_${uid})" opacity=".95">
+          <path d="M18 37 C30 31 41 31 72 39" fill="none" stroke="${line}" stroke-width="1.15" opacity=".42"/>
+          <path d="M18 49 C31 44 41 45 74 51" fill="none" stroke="${line}" stroke-width="1.15" opacity=".4"/>
+          <path d="M18 61 C31 56 44 56 74 62" fill="none" stroke="${line}" stroke-width="1.15" opacity=".36"/>
+          <path d="M26 29 C35 34 34 43 27 56" fill="none" stroke="${line}" stroke-width="1.05" opacity=".34"/>
+          <path d="M61 28 C50 36 49 48 63 63" fill="none" stroke="${line}" stroke-width="1.05" opacity=".34"/>
+          <path d="M31 42 c3 -2 6 -2 8 0 c2 2 2 5 0 7 c-2 2 -5 2 -7 0 c-2 -2 -2 -5 -1 -7z" fill="none" stroke="${line}" stroke-width=".9" opacity=".28"/>
+        </g>
+        <text x="46" y="56" text-anchor="middle" font-size="33" font-weight="800" fill="#f7f4ee"
+              font-family="Georgia, 'Times New Roman', serif">${num}</text>
+        <path d="M18 73 C30 77 38 79 46 79 C54 79 62 77 74 73
+                 L74 83
+                 C62 86 54 88 46 88
+                 C38 88 30 86 18 83Z"
+              fill="#f7f1e6"/>
+        <text x="46" y="84" text-anchor="middle" font-size="8.5" font-weight="700"
+              fill="#3b3327" letter-spacing=".7"
+              font-family="Georgia, 'Times New Roman', serif">${label}</text>
       </svg>
     `;
   }
-
 
   /* ---------- Data ---------- */
   // NOTE: Avoid property names like "sub" to prevent collisions with String.prototype.sub in some render paths.
   const INSTALL = [
     
     // SAFETY FIRST (non-marker)
-{ id:"i0", marker:null, title:"Safety First", kicker:"Before beginning work", items:[
+{ id:"i0", marker:null, title:"Safety First", kicker:"Before beginning work", reminder:true, items:[
   { id:"i0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
   { id:"i0_fvd", text:"Use a Foreign Voltage Detector (FVD) when conditions warrant before contacting metallic enclosures/terminals.", detail:"Treat circuits as energized until verified safe. Verify tool function per local guidance." },
   { id:"i0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe (weather, pets, trip hazards, unsafe access)." }
 ]},
 
-    { id:"precall", marker:null, title:"Pre-Call", kicker:"", items:[
-      { id:"precall_1", text:"Perform Pre-Call within 15 min of dispatching by calling the CBR.", detail:"If no answer, leave a voicemail and send a text message." }
+    { id:"precall", marker:null, title:"Dispatch / Pre-Call", kicker:"", items:[
+      { id:"precall_1", text:"Review dispatch details, then perform the Pre-Call within 15 minutes of dispatching by calling the CBR.", detail:"If no answer, leave a voicemail and send a text message." }
     ]},
     { id:"m1", marker:1, title:"Greet & Verify", kicker:"Marker 1", items:[
       { id:"m1_1", text:"Greet the customer.", detail:"Confirm availability for duration of install and confirm SHM app is downloaded." }
@@ -1049,15 +1505,11 @@
       { id:"m7_2", text:"Thank customer for choosing AT&T.", detail:"Provide Make it Matter gift (if applicable)." },
       { id:"m7_3", text:"Finalize testing and close job at Prem.", detail:"Confirm everything documented." }
     ]},
-    { id:"scope_ref", marker:null, title:"Install Scoping & True Test (Reference)", kicker:"Reference", items:[
-      { id:"sref_1", text:"Scope checkpoints (typical): PFP jumper → PFP bulkhead → Launch cable → End of Drop → End of Home Run → SFP / both ends jumper.", detail:"Use Atlas scope workflow and verify uploads." },
-      { id:"sref_2", text:"True Test checkpoints (typical): PFP / assigned APN, End of Drop (outside), Inside Home after SFP/jumper.", detail:"Follow local guidance if counts differ by market/job type." }
-    ]}
   ];
 
   const REPAIR = [
     // SAFETY FIRST (non-marker)
-    { id:"r0", marker:null, title:"Safety First", kicker:"Before beginning work", items:[
+    { id:"r0", marker:null, title:"Safety First", kicker:"Before beginning work", reminder:true, items:[
       { id:"r0_ppe", text:"Wear all required PPE appropriate to the job function.", detail:"Examples: safety glasses, gloves, high-visibility vest; hard hat / fall protection where required." },
       { id:"r0_site", text:"Confirm job-site safety standards are met before starting work.", detail:"Pause and reassess if conditions are unsafe." }
     ]},
@@ -1158,63 +1610,8 @@ const REPAIR_MARKER_LABELS = {
 };
 
   function miniBadgeSVG(mode, marker){
-  const num = String(marker);
-  const isInstall = mode === "install";
-  const fill = isInstall ? "#1aa7d8" : "#8cc63e";
-  const stroke = isInstall ? "rgba(26,167,216,.55)" : "rgba(140,198,62,.55)";
-  const ribbonText = isInstall ? "FIBER INSTALL" : "FIBER REPAIR";
-  // Topo-like pattern (light lines) inside the fill
-  return `
-    <svg class="miniBadge" viewBox="0 0 72 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <defs>
-        <pattern id="topo_${mode}_${marker}" width="18" height="18" patternUnits="userSpaceOnUse">
-          <path d="M0 6 C4 2, 8 2, 18 6" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
-          <path d="M0 12 C6 8, 12 8, 18 12" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.1"/>
-          <path d="M3 0 C6 4, 6 8, 3 18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.0"/>
-        </pattern>
-      </defs>
-
-      <!-- Outer teardrop -->
-      <path d="M36 4
-               C52 4 64 16 64 34
-               C64 53 51 70 36 72
-               C21 70 8 53 8 34
-               C8 16 20 4 36 4 Z"
-            fill="rgba(255,255,255,.82)"
-            stroke="${stroke}" stroke-width="3"/>
-
-      <!-- Inner fill -->
-      <path d="M36 10
-               C48 10 58 20 58 34
-               C58 49 47 62 36 64
-               C25 62 14 49 14 34
-               C14 20 24 10 36 10 Z"
-            fill="${fill}" />
-
-      <!-- Topo overlay -->
-      <path d="M36 10
-               C48 10 58 20 58 34
-               C58 49 47 62 36 64
-               C25 62 14 49 14 34
-               C14 20 24 10 36 10 Z"
-            fill="url(#topo_${mode}_${marker})" opacity="0.9"/>
-
-      <!-- Number -->
-      <text x="36" y="41" text-anchor="middle" font-size="30" font-weight="900" fill="white"
-            font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${num}</text>
-
-      <!-- Ribbon -->
-      <path d="M16 56 Q36 66 56 56"
-            fill="rgba(255,255,255,.86)" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
-      <text x="36" y="62" text-anchor="middle" font-size="9" font-weight="900"
-            fill="rgba(17,24,39,.75)" letter-spacing="1.1"
-            font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">${ribbonText}</text>
-    </svg>
-  `;
-}
-
-
-
+    return badgeSVG(marker, mode);
+  }
 
   function renderMarkerRail(mode, sections){
     const rail = document.getElementById("markerRail");
@@ -1299,15 +1696,12 @@ const INSTALL_REFS = [
   { title:"M&P: Fiber Scoping & Cleaning", desc:"Proper scoping/cleaning procedure.", url:"https://youknow.att.com/afo/mp-fiber-scoping-and-cleaning/" }
 ];
 
-function renderRefs(){
-  const body = $("refsBody");
-  if(!body) return;
-  const list = (state.mode === "repair") ? REPAIR_REFS : INSTALL_REFS;
-  if(!Array.isArray(list) || list.length === 0){
-    body.innerHTML = `<div style="color:var(--muted);font-size:13px">No reference links configured.</div></div>`;
-    return;
-  }
-  body.innerHTML = `
+const ALL_REFS = [...INSTALL_REFS, ...REPAIR_REFS].filter((item, idx, arr) =>
+  idx === arr.findIndex(other => other.title === item.title && other.url === item.url)
+);
+
+function refsMarkup(list){
+  return `
     <div class="refsGrid">
       ${list.map(r => {
         const t = escapeHTML(r.title || "Link");
@@ -1321,6 +1715,27 @@ function renderRefs(){
     </div>
   `;
 }
+
+function renderRefs(){
+  const body = $("refsBody");
+  if(!body) return;
+  body.innerHTML = refsMarkup(ALL_REFS);
+}
+
+function renderQuickResources(){
+  const grid = $("resourcesGrid");
+  if(!grid) return;
+  grid.innerHTML = ALL_REFS.map(r => {
+    const t = escapeHTML(r.title || "Link");
+    const d = escapeHTML(r.desc || "");
+    const u = escapeHTML(r.url || "#");
+    return `<a class="resourceCard" href="${u}" target="_blank" rel="noopener noreferrer">
+              <h4>${t}</h4>
+              <p>${d}</p>
+            </a>`;
+  }).join("");
+}
+
 /* ---------- Helpers ---------- */
   const $ = (id) => document.getElementById(id);
 
@@ -1341,6 +1756,7 @@ function renderRefs(){
     let itemDone = 0;
 
     data.forEach(sec => {
+      if(sec.reminder){ return; }
       const items = sec.items || [];
       if(items.length === 0){ return; }
       itemTotal += items.length;
@@ -1394,6 +1810,23 @@ function renderRefs(){
     // update checkbox accent by toggling class on root list
     const sections = $("sections");
     sections.classList.toggle("repairMode", isRepair);
+    updateInstallReferencesUI();
+  }
+
+  function updateInstallReferencesUI(){
+    const btn = $("toggleInstallReferences");
+    const panel = $("installReferencesPanel");
+    if(!btn || !panel) return;
+    const show = state.mode === "install";
+    btn.hidden = !show;
+    if(!show){
+      panel.hidden = true;
+      btn.classList.remove("toggleActive");
+      btn.setAttribute("aria-expanded", "false");
+      return;
+    }
+    btn.setAttribute("aria-expanded", String(!panel.hidden));
+    btn.classList.toggle("toggleActive", !panel.hidden);
   }
 
   function render(){
@@ -1411,26 +1844,39 @@ function renderRefs(){
       const marker = sec.marker;
       const items = Array.isArray(sec.items) ? sec.items : [];
 
-      const doneCount = items.filter(it => !!state.checks[it.id]).length;
-      const isDone = items.length > 0 && doneCount === items.length;
+      const doneCount = sec.reminder ? 0 : items.filter(it => !!state.checks[it.id]).length;
+      const isDone = !sec.reminder && items.length > 0 && doneCount === items.length;
 
       const badge = (marker !== null && marker !== undefined)
         ? `<div class="badgeWrap">${badgeSVG(marker, state.mode)}</div>`
-        : `<div class="badgeWrap"></div></div>`;
-      const detailEls = items.map(it => {
-        const checked = !!state.checks[it.id];
-        const safeText = escapeHTML(it.text || "");
-        const safeDetail = escapeHTML(it.detail || "");
-        return `
-          <label class="item">
-            <input type="checkbox" data-item="${it.id}" ${checked ? "checked" : ""} />
-            <div class="itemText">
-              <div class="itemTitle">${safeText}</div>
-              ${safeDetail ? `<div class="itemDetail">${safeDetail}</div>` : ""}
-            </div>
-          </label>
-        `;
-      }).join("");
+        : `<div class="badgeWrap"></div>`;
+      const detailEls = sec.reminder
+        ? items.map(it => {
+            const safeText = escapeHTML(it.text || "");
+            const safeDetail = escapeHTML(it.detail || "");
+            return `
+              <div class="item item--reminder">
+                <div class="itemText">
+                  <div class="itemTitle">${safeText}</div>
+                  ${safeDetail ? `<div class="itemDetail">${safeDetail}</div>` : ""}
+                </div>
+              </div>
+            `;
+          }).join("")
+        : items.map(it => {
+            const checked = !!state.checks[it.id];
+            const safeText = escapeHTML(it.text || "");
+            const safeDetail = escapeHTML(it.detail || "");
+            return `
+              <label class="item">
+                <input type="checkbox" data-item="${it.id}" ${checked ? "checked" : ""} />
+                <div class="itemText">
+                  <div class="itemTitle">${safeText}</div>
+                  ${safeDetail ? `<div class="itemDetail">${safeDetail}</div>` : ""}
+                </div>
+              </label>
+            `;
+          }).join("");
 
       const el = document.createElement("details");
         el.id = `sec-${sec.id}`;
@@ -1449,15 +1895,15 @@ function renderRefs(){
             ${kicker ? `<div class="kicker">${escapeHTML(kicker)}</div>` : `<div class="kicker">${marker ? "Marker "+marker : ""}</div>`}
             <div class="name">${escapeHTML(title)}</div>
           </div>
-          <div class="statusPill ${isDone ? "done" : ""}">
+          ${sec.reminder ? '' : `<div class="statusPill ${isDone ? "done" : ""}">
             <span class="statusDot ${isDone ? "done" : ""}"></span>
             <span>${isDone ? "DONE" : "NOT DONE"}</span>
-          </div>
+          </div>`}
         </summary>
         <div class="body">
-          <p class="hint">Check off items as you complete them.</p>
+          <p class="hint">${sec.reminder ? 'Review this safety reminder before starting work.' : 'Check off items as you complete them.'}</p>
           ${renderRef(sec.ref)}
-          <div class="items">${detailEls}</div>
+          <div class="items ${sec.reminder ? 'items--reminder' : ''}">${detailEls}</div>
         </div>
       `;
 
@@ -1504,8 +1950,21 @@ function renderRefs(){
       }, { passive:true });
     });
 
+
+    document.querySelectorAll('.questItems input[type="checkbox"][data-item]').forEach(cb => {
+      cb.checked = !!state.checks[cb.getAttribute("data-item")];
+      cb.addEventListener("change", () => {
+        const id = cb.getAttribute("data-item");
+        state.checks[id] = cb.checked;
+        saveState();
+      }, { passive:true });
+    });
+
     renderRefs();
+    renderQuickResources();
     calcStats();
+    updateInstallReferencesUI();
+    setPanelButtonState();
   }
 
   function escapeHTML(s){
@@ -1571,6 +2030,71 @@ function renderRefs(){
       saveState(); render();
     }, 300);
   });
+
+  $("toggleInstallReferences")?.addEventListener("click", () => {
+    const panel = $("installReferencesPanel");
+    if(!panel) return;
+    panel.hidden = !panel.hidden;
+    updateInstallReferencesUI();
+    if(!panel.hidden) panel.scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
+
+
+  /* ---------- Quick Access Panels ---------- */
+  const QUICK_PANEL_MAP = {
+    quickSafety: "panelSafety",
+    quickCode: "panelCode",
+    quickReference: "panelReference",
+    quickResources: "panelResources"
+  };
+
+  function setPanelButtonState(){
+    Object.entries(QUICK_PANEL_MAP).forEach(([btnId,panelId]) => {
+      const btn = $(btnId);
+      const panel = $(panelId);
+      if(btn && panel) btn.setAttribute("aria-expanded", String(!panel.hidden));
+    });
+    const qBtn = $("btnExpertQuest");
+    const qPanel = $("panelExpertQuest");
+    if(qBtn && qPanel) qBtn.setAttribute("aria-pressed", String(!qPanel.hidden));
+  }
+
+  function closePanel(panelId){
+    const panel = $(panelId);
+    if(panel) panel.hidden = true;
+    setPanelButtonState();
+  }
+
+  function togglePanel(panelId){
+    const panel = $(panelId);
+    if(!panel) return;
+    panel.hidden = !panel.hidden;
+    setPanelButtonState();
+    if(!panel.hidden) panel.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  Object.entries(QUICK_PANEL_MAP).forEach(([btnId,panelId]) => {
+    const btn = $(btnId);
+    if(btn) btn.addEventListener("click", () => togglePanel(panelId));
+  });
+
+  $("btnExpertQuest")?.addEventListener("click", () => togglePanel("panelExpertQuest"));
+  document.querySelectorAll("[data-close]").forEach(btn => {
+    btn.addEventListener("click", () => closePanel(btn.getAttribute("data-close")));
+  });
+
+
+
+  const resourceSearch = document.getElementById("resourceSearch");
+  if(resourceSearch){
+    resourceSearch.addEventListener("input", () => {
+      const q = resourceSearch.value.trim().toLowerCase();
+      document.querySelectorAll("#resourcesGrid .resourceCard").forEach(card => {
+        const txt = card.textContent.toLowerCase();
+        card.hidden = q ? !txt.includes(q) : false;
+      });
+    });
+  }
 
   /* ---------- Initial render ---------- */
   render();
